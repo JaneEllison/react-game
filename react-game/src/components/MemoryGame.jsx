@@ -23,20 +23,20 @@ const MemoryGame = ( {options, setOptions, highScore, setHighScore} ) => {
   ];
 
   useEffect(() => {
-    const newGame = []
+    const newGame = [];
     for (let i = 0; i < options / 2; i++) {
       const firstOption = {
         id: 2 * i,
         colorId: i,
         color: colors[i],
         flipped: false,
-      }
+      };
       const secondOption = {
         id: 2 * i + 1,
         colorId: i,
         color: colors[i],
         flipped: false,
-      }
+      };
 
       newGame.push(firstOption)
       newGame.push(secondOption)
@@ -47,21 +47,44 @@ const MemoryGame = ( {options, setOptions, highScore, setHighScore} ) => {
   }, []);
 
   useEffect(() => {
-    // Loads when the game variable changes
+    const finished = !game.some(card => !card.flipped)
+    if (finished && game.length > 0) {
+      setTimeout(() => {
+        
+        let score=20;
+
+        if (score > highScore) {
+          setHighScore(score)
+          const json = JSON.stringify(score)
+          localStorage.setItem('memorygamehighscore', json)
+        }
+
+        const newGame = window.confirm('You Win!, SCORE: ' + score + ' New Game?');
+        if (newGame) {
+          const gameLength = game.length
+          setOptions(null)
+          setTimeout(() => {
+            setOptions(gameLength)
+          }, 5)
+        } else {
+          setOptions(null)
+        }
+      }, 500)
+    }
   }, [game]);
 
   if (flippedIndexes.length === 2) {
     const match = game[flippedIndexes[0]].colorId === game[flippedIndexes[1]].colorId;
 
     if (match) {
-      const newGame = [...game]
-      newGame[flippedIndexes[0]].flipped = true
-      newGame[flippedIndexes[1]].flipped = true
-      setGame(newGame)
+      const newGame = [...game];
+      newGame[flippedIndexes[0]].flipped = true;
+      newGame[flippedIndexes[1]].flipped = true;
+      setGame(newGame);
 
-      const newIndexes = [...flippedIndexes]
-      newIndexes.push(false)
-      setFlippedIndexes(newIndexes)
+      const newIndexes = [...flippedIndexes];
+      newIndexes.push(false);
+      setFlippedIndexes(newIndexes);
     } else {
       const newIndexes = [...flippedIndexes]
       newIndexes.push(true)

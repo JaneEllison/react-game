@@ -6,9 +6,12 @@ function App() {
   const [options, setOptions] = useState(null);
   const [highScore, setHighScore] = useState(0)
 
-
   useEffect(() => {
-    // Loads when the game starts
+    const json = localStorage.getItem('memorygamehighscore')
+    const savedScore = JSON.parse(json)
+    if (savedScore) {
+      setHighScore(savedScore)
+    }
   }, []);
 
   return (
@@ -34,11 +37,11 @@ function App() {
               <>
                 <button
                   onClick={() => {
-                    const prevOptions = options
-                    setOptions(null)
+                    const prevOptions = options;
+                    setOptions(null);
                     setTimeout(() => {
-                      setOptions(prevOptions)
-                    }, 5)
+                      setOptions(prevOptions);
+                    }, 5);
                   }}
                 >
                   Restart
