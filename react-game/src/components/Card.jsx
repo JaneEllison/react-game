@@ -8,9 +8,10 @@ const Card = ({
   flippedCount,
   setFlippedCount,
   flippedIndexes,
-  setFlippedIndexes
+  setFlippedIndexes,
+  movesCount, 
+  setMovesCount,
 }) => {
-
   const [flipped, setFlipped] = useState(false);
   const {transform, opacity} = useSpring({
     opacity: flipped ? 1 : 0,
@@ -40,6 +41,7 @@ const Card = ({
         const newIndexes = [...flippedIndexes];
         newIndexes.push(id);
         setFlippedIndexes(newIndexes);
+        setMovesCount(movesCount + 1);
       };
   };
 
@@ -57,7 +59,7 @@ const Card = ({
         style={{
           opacity,
           transform: transform.interpolate(t => `${t} rotateX(180deg)`),
-          background: color,
+          backgroundImage:`url(${color})`,
         }}
       />
     </div>

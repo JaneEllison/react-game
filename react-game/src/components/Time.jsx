@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Timer = ({ isRunningStopwatch, stopwatchSeconds, setStopwatchSeconds }) => {
+const Timer = ({ isRunningStopwatch, stopwatchSeconds, setStopwatchSeconds, movesCount }) => {
   const changeSeconds = (seconds) => {
     setStopwatchSeconds(seconds);
   };
@@ -25,7 +25,7 @@ const Timer = ({ isRunningStopwatch, stopwatchSeconds, setStopwatchSeconds }) =>
         Time: {`${formatTime(minutes)}:${formatTime(seconds)}`}
       </div>
       <div>
-        Moves: 20
+        Moves: {`${movesCount}`}
       </div>
     </div>
   )

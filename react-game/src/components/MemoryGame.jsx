@@ -1,26 +1,12 @@
 import React, { useState, useEffect } from "react";
-import  Card from './Card'
+import  Card from './Card';
+import colors from '../constants/abstract'
 
-const MemoryGame = ( {options, setOptions, highScore, setHighScore, setIsRunningStopwatch} ) => {
+const MemoryGame = ( {options, setOptions, highScore, setHighScore, setIsRunningStopwatch, movesCount, setMovesCount} ) => {
 
   const [game, setGame] = useState([]);
   const [flippedCount, setFlippedCount] = useState(0);
   const [flippedIndexes, setFlippedIndexes] = useState([]);
-
-  const colors = [
-    '#ecdb54',
-    '#e34132',
-    '#6ca0dc',
-    '#944743',
-    '#dbb2d1',
-    '#ec9787',
-    '#00a68c',
-    '#645394',
-    '#6c4f3d',
-    '#ebe1df',
-    '#bc6ca7',
-    '#bfd833',
-  ];
 
   useEffect(() => {
     const newGame = [];
@@ -108,6 +94,8 @@ const MemoryGame = ( {options, setOptions, highScore, setHighScore, setIsRunning
                   setFlippedCount={setFlippedCount}
                   flippedIndexes={flippedIndexes}
                   setFlippedIndexes={setFlippedIndexes}
+                  movesCount={movesCount}
+                  setMovesCount={setMovesCount}
                 />
               </div>
             ))}

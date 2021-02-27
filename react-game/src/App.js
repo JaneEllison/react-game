@@ -7,6 +7,7 @@ function App() {
   const [options, setOptions] = useState(null);
   const [isRunningStopwatch, setIsRunningStopwatch] = useState(false);
   const [stopwatchSeconds, setStopwatchSeconds] = useState(0);
+  const [movesCount, setMovesCount] = useState(0);
   const [highScore, setHighScore] = useState(0);
   // const [gameStats, setGameStats] = useState();
 
@@ -31,16 +32,148 @@ function App() {
           isRunningStopwatch={isRunningStopwatch}
           stopwatchSeconds={stopwatchSeconds}
           setStopwatchSeconds={setStopwatchSeconds}
+          movesCount={movesCount}
         />
       </header>
       <main>
         { options === null 
           ? (
-              <>
-              <button onClick={() => setOptions(12)}>Easy</button>
-              <button onClick={() => setOptions(18)}>Medium</button>
-              <button onClick={() => setOptions(24)}>Hard</button>
-              </>
+            <div className="difficult__buttons">
+
+              <h2>Choose a difficulty:</h2>
+              <button onClick={() => {
+                setOptions(12);
+                setStopwatchSeconds(0);
+                setMovesCount(0);
+              }}>
+                Easy
+              </button>
+              <button onClick={() => {
+                setOptions(18);
+                setStopwatchSeconds(0);
+                setMovesCount(0);
+              }}>
+                Medium
+              </button>
+              <button onClick={() => {
+                setOptions(24);
+                setStopwatchSeconds(0);
+                setMovesCount(0);
+              }}>
+                Hard
+              </button>
+              <h2>Choose a theme:</h2>
+              <div className="bg__settings">
+                <div className="block__settings">
+                  <button 
+                    name="cardBg"
+                    type="radio"
+                    value="abstract"
+                    className="card__bg"
+                  >
+                    Abstract
+                  </button>
+                  <button
+                    name="cardBg"
+                    type="radio"
+                    value="animals"
+                    className="card__bg"
+                  >
+                    Animals
+                  </button>
+                  <button
+                    className="card__bg"
+                    name="cardBg"
+                    type="radio"
+                    value="eat"
+                  >
+                    Eat:
+                  </button>
+                  <button
+                    className="card__bg"
+                    name="cardBg"
+                    type="radio"
+                    value="fire"
+                  >
+                    Fire
+                  </button>
+                </div>
+                <div className="block__settings">
+                  <button
+                    className="card__bg"
+                    name="cardBg"
+                    type="radio"
+                    value="flora"
+                  >
+                    Flora
+                  </button>
+                  <button
+                    className="card__bg"
+                    name="cardBg"
+                    type="radio"
+                    value="landscape"
+                  >
+                    Landscape
+                  </button>
+                  <button
+                    className="card__bg"
+                    name="cardBg"
+                    type="radio"
+                    value="neon"
+                  >
+                    Neon
+                  </button>
+                  <button
+                    className="card__bg"
+                    name="cardBg"
+                    type="radio"
+                    value="sea"
+                  >
+                    Sea
+                  </button>
+                </div>
+                <div className="block__settings">
+                  <button
+                    className="card__bg"
+                    name="cardBg"
+                    type="radio"
+                    value="stars"
+                  >
+                    Stars
+                  </button>
+                  <button
+                    className="card__bg"
+                    name="cardBg"
+                    type="radio"
+                    value="summer"
+                  >
+                    Summer
+                  </button>
+                  <button
+                    className="card__bg"
+                    name="cardBg"
+                    type="radio"
+                    value="techologies"
+                  >
+                    Techologies
+                  </button>
+                  <button
+                    className="card__bg"
+                    name="cardBg"
+                    type="radio"
+                    value="doggo"
+                  >
+                    Doggo
+                  </button>
+                </div>
+              </div>
+              {/* <button onClick={() => {
+                setIsRunningStopwatch(true);
+              }}>
+                Back
+              </button> */}
+              
+            </div>
             )
           : (
               <>
@@ -49,6 +182,7 @@ function App() {
                     const prevOptions = options;
                     setOptions(null);
                     setStopwatchSeconds(0);
+                    setMovesCount(0);
                     setTimeout(() => {
                       setOptions(prevOptions);
                     }, 5);
@@ -59,9 +193,8 @@ function App() {
                 <button onClick={() => {
                   setOptions(null);
                   setIsRunningStopwatch(false);
-                  setStopwatchSeconds(0);
                 }}>
-                  Main Menu
+                  Menu
                 </button>
               </>
             )
@@ -76,10 +209,14 @@ function App() {
                 highScore={highScore}
                 setHighScore={setHighScore}
                 setIsRunningStopwatch={setIsRunningStopwatch}
+                movesCount={movesCount}
+                setMovesCount={setMovesCount}
               />
               ) 
             : (
-                <h2>Choose a difficulty to begin!</h2>
+                <button>
+                  Start new game
+                </button>
               )
         }
       </main>

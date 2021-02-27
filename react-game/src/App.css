@@ -3,6 +3,8 @@
   background-color: #1a1a1a;
   min-height: 100vh;
   color: white;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
 }
 
 .App-header {
@@ -20,7 +22,6 @@
 
 body {
   text-align: center;
-  font-family: -apple-system, sans-serif;
 }
 
 .container {
@@ -32,14 +33,54 @@ body {
   margin-bottom: 20px;
 }
 
+.difficult__buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 button {
+  width: 20%;
   background: #00ad9f;
   border-radius: 4px;
   font-weight: 700;
   color: #fff;
   border: none;
   padding: 7px 15px;
-  margin-left: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.bg__settings {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+}
+
+.block__settings {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 8px;
+}
+
+.block__settings:last-child {
+  margin-right: 0;
+}
+
+.card__bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #00ad9f;
+  border-radius: 4px;
+  font-weight: 700;
+  color: #fff;
+  border: none;
+  margin-bottom: 8px;
   cursor: pointer;
 }
 
@@ -84,9 +125,9 @@ button:focus {
 }
 
 .back {
-  background-image: url(https://images.unsplash.com/photo-1544511916-0148ccdeb877?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1901&q=80i&auto=format&fit=crop);
+  background-image: url(./assets/neon/3.jpg);
 }
 
 .front {
-  background-image: url(https://images.unsplash.com/photo-1540206395-68808572332f?ixlib=rb-1.2.1&w=1181&q=80&auto=format&fit=crop);
+  background-color: #ffffff;
 }
