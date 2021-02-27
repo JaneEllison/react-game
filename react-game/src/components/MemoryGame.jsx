@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import  Card from './Card'
 
-const MemoryGame = ( {options, setOptions, highScore, setHighScore} ) => {
+const MemoryGame = ( {options, setOptions, highScore, setHighScore, setIsRunningStopwatch} ) => {
 
   const [game, setGame] = useState([]);
   const [flippedCount, setFlippedCount] = useState(0);
@@ -38,12 +38,13 @@ const MemoryGame = ( {options, setOptions, highScore, setHighScore} ) => {
         flipped: false,
       };
 
-      newGame.push(firstOption)
-      newGame.push(secondOption)
+      newGame.push(firstOption);
+      newGame.push(secondOption);
     }
 
-    const shuffledGame = newGame.sort(() => Math.random() - 0.5)
-    setGame(shuffledGame)
+    const shuffledGame = newGame.sort(() => Math.random() - 0.5);
+    setGame(shuffledGame);
+    setIsRunningStopwatch(true);
   }, []);
 
   useEffect(() => {

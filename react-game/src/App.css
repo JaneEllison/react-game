@@ -12,6 +12,12 @@
   justify-content: center;
 }
 
+.statistic {
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+}
+
 body {
   text-align: center;
   font-family: -apple-system, sans-serif;

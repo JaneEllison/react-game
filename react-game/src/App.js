@@ -1,10 +1,14 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
 import MemoryGame from './components/MemoryGame'
+import Time from './components/Time'
 
 function App() {
   const [options, setOptions] = useState(null);
-  const [highScore, setHighScore] = useState(0)
+  const [isRunningStopwatch, setIsRunningStopwatch] = useState(false);
+  const [stopwatchSeconds, setStopwatchSeconds] = useState(0);
+  const [highScore, setHighScore] = useState(0);
+  // const [gameStats, setGameStats] = useState();
 
   useEffect(() => {
     const json = localStorage.getItem('memorygamehighscore')
@@ -23,6 +27,11 @@ function App() {
         <div>
           High Score: {highScore}
         </div>
+        <Time
+          isRunningStopwatch={isRunningStopwatch}
+          stopwatchSeconds={stopwatchSeconds}
+          setStopwatchSeconds={setStopwatchSeconds}
+        />
       </header>
       <main>
         { options === null 
@@ -39,6 +48,7 @@ function App() {
                   onClick={() => {
                     const prevOptions = options;
                     setOptions(null);
+                    setStopwatchSeconds(0);
                     setTimeout(() => {
                       setOptions(prevOptions);
                     }, 5);
@@ -46,7 +56,13 @@ function App() {
                 >
                   Restart
                 </button>
-                <button onClick={() => setOptions(null)}>Main Menu</button>
+                <button onClick={() => {
+                  setOptions(null);
+                  setIsRunningStopwatch(false);
+                  setStopwatchSeconds(0);
+                }}>
+                  Main Menu
+                </button>
               </>
             )
         }
@@ -59,6 +75,7 @@ function App() {
                 setOptions={setOptions}
                 highScore={highScore}
                 setHighScore={setHighScore}
+                setIsRunningStopwatch={setIsRunningStopwatch}
               />
               ) 
             : (
