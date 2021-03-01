@@ -54,20 +54,20 @@ button {
 }
 
 .bg__settings {
+  width: 80%;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
-  width: 60%;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 4px;
 }
 
 .block__settings {
-  width: 33%;
+  width: 200px;
   display: flex;
   flex-direction: column;
   margin-right: 8px;
-}
-
-.block__settings:last-child {
-  margin-right: 0;
 }
 
 .card__bg {
@@ -92,21 +92,19 @@ button:focus {
   outline: 0;
 }
 
-#cards {
-  width: 1060px;
+.cards {
+  width: 80%;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 10px;
+  row-gap: 10px;
 }
 
 .card {
   width: 160px;
   height: 160px;
-  margin-bottom: 20px;
-}
-
-.card:not(:nth-child(6n)) {
-  margin-right: 20px;
 }
 
 .c {

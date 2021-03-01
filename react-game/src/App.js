@@ -1,14 +1,21 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
-import MemoryGame from './components/MemoryGame'
-import Time from './components/Time'
+import MemoryGame from './components/MemoryGame';
+import Time from './components/Time';
+import buttons from './constants/buttons';
 
 function App() {
-  const [options, setOptions] = useState(null);
+  const [options, setOptions] = useState({
+    difficult: null,
+    theme: null,
+  });
+  // const [options, setOptions] = useState(null);
   const [isRunningStopwatch, setIsRunningStopwatch] = useState(false);
   const [stopwatchSeconds, setStopwatchSeconds] = useState(0);
   const [movesCount, setMovesCount] = useState(0);
   const [highScore, setHighScore] = useState(0);
+
+  const [isGameStarted, setIsGameStarted] = useState(false);
   // const [gameStats, setGameStats] = useState();
 
   useEffect(() => {
@@ -18,7 +25,6 @@ function App() {
       setHighScore(savedScore)
     }
   }, []);
-
   return (
     <div className="App">
       <header className="App-header">
@@ -36,27 +42,26 @@ function App() {
         />
       </header>
       <main>
-        { options === null 
+        { !isGameStarted
           ? (
             <div className="difficult__buttons">
-
               <h2>Choose a difficulty:</h2>
               <button onClick={() => {
-                setOptions(12);
-                setStopwatchSeconds(0);
+                setOptions({difficult:12});
+                setStopwatchSeconds(0); 
                 setMovesCount(0);
               }}>
                 Easy
               </button>
               <button onClick={() => {
-                setOptions(18);
+                setOptions({difficult:18});
                 setStopwatchSeconds(0);
                 setMovesCount(0);
               }}>
                 Medium
               </button>
               <button onClick={() => {
-                setOptions(24);
+                setOptions({difficult:24});
                 setStopwatchSeconds(0);
                 setMovesCount(0);
               }}>
@@ -64,115 +69,27 @@ function App() {
               </button>
               <h2>Choose a theme:</h2>
               <div className="bg__settings">
-                <div className="block__settings">
-                  <button 
-                    name="cardBg"
-                    type="radio"
-                    value="abstract"
-                    className="card__bg"
-                  >
-                    Abstract
-                  </button>
-                  <button
-                    name="cardBg"
-                    type="radio"
-                    value="animals"
-                    className="card__bg"
-                  >
-                    Animals
-                  </button>
-                  <button
-                    className="card__bg"
-                    name="cardBg"
-                    type="radio"
-                    value="eat"
-                  >
-                    Eat:
-                  </button>
-                  <button
-                    className="card__bg"
-                    name="cardBg"
-                    type="radio"
-                    value="fire"
-                  >
-                    Fire
-                  </button>
-                </div>
-                <div className="block__settings">
-                  <button
-                    className="card__bg"
-                    name="cardBg"
-                    type="radio"
-                    value="flora"
-                  >
-                    Flora
-                  </button>
-                  <button
-                    className="card__bg"
-                    name="cardBg"
-                    type="radio"
-                    value="landscape"
-                  >
-                    Landscape
-                  </button>
-                  <button
-                    className="card__bg"
-                    name="cardBg"
-                    type="radio"
-                    value="neon"
-                  >
-                    Neon
-                  </button>
-                  <button
-                    className="card__bg"
-                    name="cardBg"
-                    type="radio"
-                    value="sea"
-                  >
-                    Sea
-                  </button>
-                </div>
-                <div className="block__settings">
-                  <button
-                    className="card__bg"
-                    name="cardBg"
-                    type="radio"
-                    value="stars"
-                  >
-                    Stars
-                  </button>
-                  <button
-                    className="card__bg"
-                    name="cardBg"
-                    type="radio"
-                    value="summer"
-                  >
-                    Summer
-                  </button>
-                  <button
-                    className="card__bg"
-                    name="cardBg"
-                    type="radio"
-                    value="techologies"
-                  >
-                    Techologies
-                  </button>
-                  <button
-                    className="card__bg"
-                    name="cardBg"
-                    type="radio"
-                    value="doggo"
-                  >
-                    Doggo
-                  </button>
-                </div>
+                {buttons.map((button, index)=>(
+                  <div className="block__settings" key={index}>
+                    <button 
+                      name="cardBg"
+                      type="radio"
+                      className="card__bg"
+                      onClick={()=>{setOptions({
+                        ...options,
+                        theme: button.text,
+                      })}}
+                    >
+                      {button.text}
+                    </button>
+                  </div>
+                ))}
               </div>
-              {/* <button onClick={() => {
-                setIsRunningStopwatch(true);
-              }}>
-                Back
-              </button> */}
-              
+              <button
+                onClick={()=>setIsGameStarted(true)}
+              >
+                Start new game
+              </button>
             </div>
             )
           : (
@@ -180,30 +97,26 @@ function App() {
                 <button
                   onClick={() => {
                     const prevOptions = options;
-                    setOptions(null);
+                    // setOptions(null);
                     setStopwatchSeconds(0);
                     setMovesCount(0);
+                    setIsGameStarted(false);
                     setTimeout(() => {
-                      setOptions(prevOptions);
+                      // setOptions(prevOptions);
+                      setIsGameStarted(true);
                     }, 5);
                   }}
                 >
                   Restart
                 </button>
                 <button onClick={() => {
-                  setOptions(null);
+                  setOptions({difficult:null});
                   setIsRunningStopwatch(false);
+                  setIsGameStarted(false);
                 }}>
                   Menu
                 </button>
-              </>
-            )
-        }
-
-        {
-          options
-            ? (
-              <MemoryGame
+                <MemoryGame
                 options={options}
                 setOptions={setOptions}
                 highScore={highScore}
@@ -211,13 +124,10 @@ function App() {
                 setIsRunningStopwatch={setIsRunningStopwatch}
                 movesCount={movesCount}
                 setMovesCount={setMovesCount}
-              />
-              ) 
-            : (
-                <button>
-                  Start new game
-                </button>
-              )
+                setIsGameStarted={setIsGameStarted}
+                />
+              </>
+            )
         }
       </main>
       <footer>

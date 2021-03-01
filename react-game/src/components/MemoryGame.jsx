@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import  Card from './Card';
 import colors from '../constants/abstract'
 
-const MemoryGame = ( {options, setOptions, highScore, setHighScore, setIsRunningStopwatch, movesCount, setMovesCount} ) => {
+const MemoryGame = ( {options, setOptions, highScore, setHighScore, setIsRunningStopwatch, 
+  movesCount, setMovesCount, setIsGameStarted} ) => {
 
   const [game, setGame] = useState([]);
   const [flippedCount, setFlippedCount] = useState(0);
@@ -10,7 +11,7 @@ const MemoryGame = ( {options, setOptions, highScore, setHighScore, setIsRunning
 
   useEffect(() => {
     const newGame = [];
-    for (let i = 0; i < options / 2; i++) {
+    for (let i = 0; i < options.difficult / 2; i++) {
       const firstOption = {
         id: 2 * i,
         colorId: i,
@@ -48,15 +49,19 @@ const MemoryGame = ( {options, setOptions, highScore, setHighScore, setIsRunning
 
         const newGame = window.confirm('You Win!, SCORE: ' + score + ' New Game?');
         if (newGame) {
-          const gameLength = game.length
-          setOptions(null)
+          // const gameLength = game.length;
+          // setOptions({difficult:null});
+          // setTimeout(() => {
+          //   setOptions({difficult:gameLength});
+          // }, 5);
+          setIsGameStarted(false);
           setTimeout(() => {
-            setOptions(gameLength)
-          }, 5)
+          setIsGameStarted(true);
+          }, 5);
         } else {
-          setOptions(null)
+          setOptions({difficult:null});
         }
-      }, 500)
+      }, 500);
     }
   }, [game]);
 
@@ -83,7 +88,7 @@ const MemoryGame = ( {options, setOptions, highScore, setHighScore, setIsRunning
     <div>
       {(game.length === 0)
         ? 'loading'
-        : <div id="cards">
+        : <div className="cards">
             {game.map((card, index) => (
               <div className="card" key={index}>
                 <Card
