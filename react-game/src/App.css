@@ -43,7 +43,7 @@ body {
 
 button {
   width: 20%;
-  background: #00ad9f;
+  background: #fc422ab7;
   border-radius: 4px;
   font-weight: 700;
   color: #fff;
@@ -51,6 +51,14 @@ button {
   padding: 7px 15px;
   margin-bottom: 8px;
   cursor: pointer;
+}
+
+button:disabled {
+  background: #fffff681;
+  cursor: no-drop;
+}
+button:disabled:hover {
+  background: #fffff681;
 }
 
 .bg__settings {
@@ -75,7 +83,7 @@ button {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: #00ad9f;
+  background-color: #fc422ab7;
   border-radius: 4px;
   font-weight: 700;
   color: #fff;
@@ -85,7 +93,7 @@ button {
 }
 
 button:hover {
-  background: #008378;
+  background: #b41703b7;
 }
 
 button:focus {
@@ -105,6 +113,10 @@ button:focus {
 .card {
   width: 160px;
   height: 160px;
+}
+
+.active {
+  background: #851000b7;
 }
 
 .c {

@@ -1,4 +1,4 @@
-const buttons = [
+export const ThemeButtons = [
   {
     id: 1,
     text: 'Abstract',
@@ -49,4 +49,20 @@ const buttons = [
   },
 ];
 
-export default buttons;
+export const DifficultButtons = [
+  {
+    id: 1,
+    text: 'Easy',
+    value: 12,
+  },
+  {
+    id: 2,
+    text: 'Medium',
+    value: 18,
+  },
+  {
+    id: 3,
+    text: 'Hard',
+    value: 24,
+  },
+]

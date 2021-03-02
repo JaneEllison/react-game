@@ -49,11 +49,6 @@ const MemoryGame = ( {options, setOptions, highScore, setHighScore, setIsRunning
 
         const newGame = window.confirm('You Win!, SCORE: ' + score + ' New Game?');
         if (newGame) {
-          // const gameLength = game.length;
-          // setOptions({difficult:null});
-          // setTimeout(() => {
-          //   setOptions({difficult:gameLength});
-          // }, 5);
           setIsGameStarted(false);
           setTimeout(() => {
           setIsGameStarted(true);

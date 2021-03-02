@@ -2,18 +2,27 @@ import './App.css';
 import React, { useState, useEffect } from "react";
 import MemoryGame from './components/MemoryGame';
 import Time from './components/Time';
-import buttons from './constants/buttons';
+import { ThemeButtons, DifficultButtons } from './constants/buttons';
 
 function App() {
   const [options, setOptions] = useState({
     difficult: null,
     theme: null,
   });
-  // const [options, setOptions] = useState(null);
   const [isRunningStopwatch, setIsRunningStopwatch] = useState(false);
   const [stopwatchSeconds, setStopwatchSeconds] = useState(0);
   const [movesCount, setMovesCount] = useState(0);
   const [highScore, setHighScore] = useState(0);
+
+  const [currentOptions, setCurrentOptions] = useState({
+    currentDifficult: null,
+    currentTheme: null,
+  });
+  const chooseCurrentOption=(event) => {
+    (event.target.className === 'card__bg')
+    ? setCurrentOptions({...currentOptions, currentTheme:event.target.innerText})
+    : setCurrentOptions({...currentOptions, currentDifficult:event.target.innerText})
+  }
 
   const [isGameStarted, setIsGameStarted] = useState(false);
   // const [gameStats, setGameStats] = useState();
@@ -46,39 +55,35 @@ function App() {
           ? (
             <div className="difficult__buttons">
               <h2>Choose a difficulty:</h2>
-              <button onClick={() => {
-                setOptions({difficult:12});
-                setStopwatchSeconds(0); 
-                setMovesCount(0);
-              }}>
-                Easy
-              </button>
-              <button onClick={() => {
-                setOptions({difficult:18});
-                setStopwatchSeconds(0);
-                setMovesCount(0);
-              }}>
-                Medium
-              </button>
-              <button onClick={() => {
-                setOptions({difficult:24});
-                setStopwatchSeconds(0);
-                setMovesCount(0);
-              }}>
-                Hard
-              </button>
+              {DifficultButtons.map((button)=>(
+                <button 
+                  key={button.id}
+                  className={currentOptions.currentDifficult === button.text ? "active" : ""}
+                  onClick={(event)=> {
+                    setOptions({
+                    ...options,
+                    difficult: button.value,
+                    });
+                    chooseCurrentOption(event);
+                  }}
+                >
+                  {button.text}
+                </button>
+              ))
+              }
               <h2>Choose a theme:</h2>
               <div className="bg__settings">
-                {buttons.map((button, index)=>(
-                  <div className="block__settings" key={index}>
+                {ThemeButtons.map((button)=>(
+                  <div className="block__settings" key={button.id}>
                     <button 
-                      name="cardBg"
-                      type="radio"
-                      className="card__bg"
-                      onClick={()=>{setOptions({
+                      className={currentOptions.currentTheme === button.text ? "card__bg active" : "card__bg"}
+                      onClick={(event)=> {
+                        setOptions({
                         ...options,
                         theme: button.text,
-                      })}}
+                        });
+                        chooseCurrentOption(event);
+                      }}
                     >
                       {button.text}
                     </button>
@@ -86,9 +91,22 @@ function App() {
                 ))}
               </div>
               <button
-                onClick={()=>setIsGameStarted(true)}
+                onClick={()=>{
+                  setIsGameStarted(true);
+                  setStopwatchSeconds(0); 
+                  setMovesCount(0);
+                }}
+                disabled={options.difficult === null || options.theme === null}
               >
                 Start new game
+              </button>
+              <button
+                onClick={()=>{
+                  setIsGameStarted(true);
+                  setIsRunningStopwatch(true);
+                }}
+              >
+                Back
               </button>
             </div>
             )
@@ -96,13 +114,10 @@ function App() {
               <>
                 <button
                   onClick={() => {
-                    const prevOptions = options;
-                    // setOptions(null);
                     setStopwatchSeconds(0);
                     setMovesCount(0);
                     setIsGameStarted(false);
                     setTimeout(() => {
-                      // setOptions(prevOptions);
                       setIsGameStarted(true);
                     }, 5);
                   }}
@@ -110,7 +125,6 @@ function App() {
                   Restart
                 </button>
                 <button onClick={() => {
-                  setOptions({difficult:null});
                   setIsRunningStopwatch(false);
                   setIsGameStarted(false);
                 }}>
