@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 import  Card from './Card';
 import colors from '../constants/abstract'
 
-const MemoryGame = ( {options, setOptions, highScore, setHighScore, setIsRunningStopwatch, 
-  movesCount, setMovesCount, setIsGameStarted} ) => {
+const MemoryGame = ({ options, setOptions, highScore, setHighScore, setIsRunningStopwatch, 
+  setStopwatchSeconds, movesCount, setMovesCount, setIsGameStarted, stopwatchSeconds }) => {
 
   const [game, setGame] = useState([]);
   const [flippedCount, setFlippedCount] = useState(0);
   const [flippedIndexes, setFlippedIndexes] = useState([]);
+
+  const formatTime = (time) => `${(time < 10 ? '0' : '')}${time}`;
+  const minutes = Math.floor(stopwatchSeconds / 60);
+  const seconds = Math.floor(stopwatchSeconds % 60);
 
   useEffect(() => {
     const newGame = [];
@@ -38,23 +42,24 @@ const MemoryGame = ( {options, setOptions, highScore, setHighScore, setIsRunning
     const finished = !game.some(card => !card.flipped)
     if (finished && game.length > 0) {
       setTimeout(() => {
-        
-        let score=20;
-
+        let score=movesCount;
         if (score > highScore) {
           setHighScore(score)
           const json = JSON.stringify(score)
           localStorage.setItem('memorygamehighscore', json)
         }
 
-        const newGame = window.confirm('You Win!, SCORE: ' + score + ' New Game?');
+        const newGame = window.confirm(`Wow!, SCORE:${score} TIME:${formatTime(minutes)}:${formatTime(seconds)} New Game?`);
+        setMovesCount(0);
+        setStopwatchSeconds(0);
+        setIsGameStarted(false);
         if (newGame) {
-          setIsGameStarted(false);
           setTimeout(() => {
           setIsGameStarted(true);
           }, 5);
-        } else {
-          setOptions({difficult:null});
+        }
+        else {
+          setIsRunningStopwatch(false);
         }
       }, 500);
     }

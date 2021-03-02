@@ -19,19 +19,18 @@ function App() {
     currentTheme: null,
   });
   const chooseCurrentOption=(event) => {
-    (event.target.className === 'card__bg')
+    (event.target.className === 'card__bg' || event.target.className === 'card__bg active')
     ? setCurrentOptions({...currentOptions, currentTheme:event.target.innerText})
     : setCurrentOptions({...currentOptions, currentDifficult:event.target.innerText})
-  }
-
+  };
   const [isGameStarted, setIsGameStarted] = useState(false);
   // const [gameStats, setGameStats] = useState();
 
   useEffect(() => {
-    const json = localStorage.getItem('memorygamehighscore')
-    const savedScore = JSON.parse(json)
+    const json = localStorage.getItem('memorygamehighscore');
+    const savedScore = JSON.parse(json);
     if (savedScore) {
-      setHighScore(savedScore)
+      setHighScore(savedScore);
     }
   }, []);
   return (
@@ -136,6 +135,8 @@ function App() {
                 highScore={highScore}
                 setHighScore={setHighScore}
                 setIsRunningStopwatch={setIsRunningStopwatch}
+                stopwatchSeconds={stopwatchSeconds}
+                setStopwatchSeconds={setStopwatchSeconds}
                 movesCount={movesCount}
                 setMovesCount={setMovesCount}
                 setIsGameStarted={setIsGameStarted}
