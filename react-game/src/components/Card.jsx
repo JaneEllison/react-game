@@ -3,7 +3,7 @@ import { useSpring, animated as a } from "react-spring";
 
 const Card = ({
   id,
-  color,
+  image,
   game,
   flippedCount,
   setFlippedCount,
@@ -59,7 +59,7 @@ const Card = ({
         style={{
           opacity,
           transform: transform.interpolate(t => `${t} rotateX(180deg)`),
-          backgroundImage:`url(${color})`,
+          backgroundImage:`url(${image})`,
         }}
       />
     </div>

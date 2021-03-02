@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import  Card from './Card';
-import colors from '../constants/abstract'
+import images from '../constants/abstract'
 
-const MemoryGame = ({ options, setOptions, highScore, setHighScore, setIsRunningStopwatch, 
+const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch, 
   setStopwatchSeconds, movesCount, setMovesCount, setIsGameStarted, stopwatchSeconds }) => {
 
   const [game, setGame] = useState([]);
@@ -13,19 +13,51 @@ const MemoryGame = ({ options, setOptions, highScore, setHighScore, setIsRunning
   const minutes = Math.floor(stopwatchSeconds / 60);
   const seconds = Math.floor(stopwatchSeconds % 60);
 
+  // const [currentImages, setCurrentImages] = useState(null);
+
+  // useEffect(() => {
+  //   switch (options.theme) {
+  //     case 'Abstract':
+          // let a=images.abstract
+        // setCurrentImages(images.abstract);
+      // case 'Animals':
+      //   currentImages = images.animals;
+      // case 'Doggo':
+      //   currentImages = images.doggo;
+      // case 'Eat':
+      //   currentImages = images.eat;
+      // case 'Fire':
+      //   currentImages = images.fre;
+      // case 'Flora':
+      //   currentImages = images.flora;
+      // case 'Landscape':
+      //   currentImages = images.land;
+      // case 'Neon':
+      //   currentImages = images.neon;
+      // case 'Sea':
+      //   currentImages = images.sea;
+      // case 'Stars':
+      //   currentImages = images.stars;
+      // case 'Summer':
+      //   currentImages = images.summer;
+      // case 'Technologies':
+      //   currentImages = images.tech;
+    // }
+  // }, [options.theme]);
+
   useEffect(() => {
     const newGame = [];
     for (let i = 0; i < options.difficult / 2; i++) {
       const firstOption = {
         id: 2 * i,
-        colorId: i,
-        color: colors[i],
+        imgId: i,
+        image: images.doggo[i],
         flipped: false,
       };
       const secondOption = {
         id: 2 * i + 1,
-        colorId: i,
-        color: colors[i],
+        imgId: i,
+        image: images.doggo[i],
         flipped: false,
       };
 
@@ -66,7 +98,7 @@ const MemoryGame = ({ options, setOptions, highScore, setHighScore, setIsRunning
   }, [game]);
 
   if (flippedIndexes.length === 2) {
-    const match = game[flippedIndexes[0]].colorId === game[flippedIndexes[1]].colorId;
+    const match = game[flippedIndexes[0]].imgId === game[flippedIndexes[1]].imgId;
 
     if (match) {
       const newGame = [...game];
@@ -93,7 +125,7 @@ const MemoryGame = ({ options, setOptions, highScore, setHighScore, setIsRunning
               <div className="card" key={index}>
                 <Card
                   id={index}
-                  color={card.color}
+                  image={card.image}
                   game={game}
                   flippedCount={flippedCount}
                   setFlippedCount={setFlippedCount}

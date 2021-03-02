@@ -130,16 +130,15 @@ function App() {
                   Menu
                 </button>
                 <MemoryGame
-                options={options}
-                setOptions={setOptions}
-                highScore={highScore}
-                setHighScore={setHighScore}
-                setIsRunningStopwatch={setIsRunningStopwatch}
-                stopwatchSeconds={stopwatchSeconds}
-                setStopwatchSeconds={setStopwatchSeconds}
-                movesCount={movesCount}
-                setMovesCount={setMovesCount}
-                setIsGameStarted={setIsGameStarted}
+                  options={options}
+                  highScore={highScore}
+                  setHighScore={setHighScore}
+                  setIsRunningStopwatch={setIsRunningStopwatch}
+                  stopwatchSeconds={stopwatchSeconds}
+                  setStopwatchSeconds={setStopwatchSeconds}
+                  movesCount={movesCount}
+                  setMovesCount={setMovesCount}
+                  setIsGameStarted={setIsGameStarted}
                 />
               </>
             )
