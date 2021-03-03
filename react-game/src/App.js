@@ -1,13 +1,11 @@
 import './App.css';
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import useSound from 'use-sound';
 import MemoryGame from './components/MemoryGame';
 import Time from './components/Time';
 import { ThemeButtons, DifficultButtons } from './constants/buttons';
 import sounds from './constants/sounds'
 
-const [ themeMusic, chooseSound, rightSouns, wrongSound, finishSound ] = sounds;
-
+const [ themeMusic ] = sounds;
 
 function App() {
   const [options, setOptions] = useState({
@@ -17,7 +15,11 @@ function App() {
   const [isRunningStopwatch, setIsRunningStopwatch] = useState(false);
 
   const [isSoundOn, setIsSoundOn] = useState(true);
+  const [soundValue, setSoundValue] = useState(0.5);
+  const [currentTrack, setCurrentTrack] = useState(null);
+
   const [isMusicOn, setIsMusicOn] = useState(true);
+  const [musicValue, setMusicValue] = useState(0.5);
   
   const [stopwatchSeconds, setStopwatchSeconds] = useState(0);
   const [movesCount, setMovesCount] = useState(0);
@@ -37,6 +39,7 @@ function App() {
 
   const changeSoundState = () =>{
     setIsSoundOn(!isSoundOn);
+    handleMuteSound();
   };
 
   const changeMusicState = () =>{
@@ -45,22 +48,54 @@ function App() {
   };
 
   let audioPlayer;
+  let soundPlayer;
 
   const initPlayer = () => {
     audioPlayer = document.getElementById('music');
+    soundPlayer = document.getElementById('sound')
   };
 
   const handleMuteMusic = () => {
     if (isMusicOn) {
       setTimeout(() => {
         audioPlayer.muted=true;
+        setMusicValue(0);
       }, 0);
     } else {
       setTimeout(() => {
         audioPlayer.muted=false;
+        setMusicValue(0.5);
       }, 0);
     }
   };
+
+  const handleMuteSound = () => {
+    if (isSoundOn) {
+      setTimeout(() => {
+        soundPlayer.muted=true;
+        setSoundValue(0);
+      }, 0);
+    } else {
+      setTimeout(() => {
+        soundPlayer.muted=false;
+        setSoundValue(0.5);
+      }, 0);
+    }
+  };
+
+  const setVolumeAudio = () => {
+    audioPlayer.volume = musicValue;
+  };
+
+  const setVolumeSound = () => {
+    soundPlayer.volume = soundValue;
+  };
+
+  const playSound = () => {
+    soundPlayer.play();
+  }
+
+  const formatVolume = (volume) => `${Math.round(volume * 10000) / 100}%`;
 
   useLayoutEffect(() => {
     initPlayer();
@@ -96,12 +131,17 @@ function App() {
           id='music'
           loop={true}
         />
+        <audio
+          src={currentTrack}
+          id='sound'
+        />
         { !isGameStarted
           ? (
             <div className="difficult__buttons">
               Change theme:
               <span className="switcher switcher__theme">
-                <input type="checkbox" id="switcher__theme" />
+                <input 
+                  type="checkbox" id="switcher__theme" />
                 <label htmlFor="switcher__theme"></label>
               </span>
               <div className='sound__settings'>
@@ -115,8 +155,20 @@ function App() {
                       />
                     </div>
                     <div className='sound__range'>
-                      <input type="range" id="points" name="points" min="0" max="10"></input>
-                      <label for="points">100%</label>
+                      <input type="range"
+                        id="sound"
+                        name="sound"
+                        min="0"
+                        max="1"
+                        step='0.01'
+                        value={soundValue}
+                        onChange={(event)=>{
+                          setSoundValue(event.target.value);
+                          setVolumeSound();
+                        }}
+                        disabled={!soundValue}
+                      />
+                      <label htmlFor="sound">{formatVolume(soundValue)}</label>
                     </div>
                   </div>
                 </div>
@@ -130,8 +182,21 @@ function App() {
                       />
                     </div>
                     <div className='sound__range'>
-                        <input type="range" id="points" name="points" min="0" max="10"></input>
-                        <label for="points">100%</label>
+                        <input
+                          type="range"
+                          id="music"
+                          name="music"
+                          min="0"
+                          max="1"
+                          step='0.01'
+                          value={musicValue}
+                          onChange={(event)=>{
+                            setMusicValue(event.target.value);
+                            setVolumeAudio();
+                          }}
+                          disabled={!musicValue}
+                        />
+                        <label htmlFor="music">{formatVolume(musicValue)}</label>
                     </div>
                   </div>
                 </div>
@@ -222,6 +287,8 @@ function App() {
                   movesCount={movesCount}
                   setMovesCount={setMovesCount}
                   setIsGameStarted={setIsGameStarted}
+                  playSound={playSound}
+                  setCurrentTrack={setCurrentTrack}
                 />
               </>
             )

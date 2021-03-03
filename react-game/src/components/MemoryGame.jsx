@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import  Card from './Card';
-import images from '../constants/abstract'
+import images from '../constants/abstract';
+import sounds from '../constants/sounds'
 
 const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch, 
-  setStopwatchSeconds, movesCount, setMovesCount, setIsGameStarted, stopwatchSeconds }) => {
+  setStopwatchSeconds, movesCount, setMovesCount, setIsGameStarted, stopwatchSeconds,
+  playSound, setCurrentTrack, }) => {
 
   const [game, setGame] = useState([]);
   const [flippedCount, setFlippedCount] = useState(0);
@@ -76,9 +78,9 @@ const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch,
       setTimeout(() => {
         let score=movesCount;
         if (score > highScore) {
-          setHighScore(score)
-          const json = JSON.stringify(score)
-          localStorage.setItem('memorygamehighscore', json)
+          setHighScore(score);
+          const json = JSON.stringify(score);
+          localStorage.setItem('memorygamehighscore', json);
         }
 
         const newGame = window.confirm(`Wow!, SCORE:${score} TIME:${formatTime(minutes)}:${formatTime(seconds)} New Game?`);
@@ -86,6 +88,8 @@ const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch,
         setStopwatchSeconds(0);
         setIsGameStarted(false);
         if (newGame) {
+          setCurrentTrack(sounds.finishSound);
+          playSound();
           setTimeout(() => {
           setIsGameStarted(true);
           }, 5);
@@ -133,6 +137,8 @@ const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch,
                   setFlippedIndexes={setFlippedIndexes}
                   movesCount={movesCount}
                   setMovesCount={setMovesCount}
+                  playSound={playSound}
+                  setCurrentTrack={setCurrentTrack}
                 />
               </div>
             ))}

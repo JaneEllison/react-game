@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSpring, animated as a } from "react-spring";
+import sounds from '../constants/sounds'
 
 const Card = ({
   id,
@@ -11,6 +12,8 @@ const Card = ({
   setFlippedIndexes,
   movesCount, 
   setMovesCount,
+  playSound,
+  setCurrentTrack,
 }) => {
   const [flipped, setFlipped] = useState(false);
   const {transform, opacity} = useSpring({
@@ -25,10 +28,16 @@ const Card = ({
         setFlipped(state => !state);
         setFlippedCount(flippedCount + 1);
         setFlippedIndexes([]);
-      }, 800)
+        setCurrentTrack(sounds.wrongSound);
+        playSound();
+      }, 1000)
     } else if (flippedIndexes[2] === false && id === 0) {
       setFlippedCount(flippedCount + 1);
       setFlippedIndexes([]);
+      setTimeout(() => {
+        setCurrentTrack(sounds.rightSouns);
+        playSound();
+      }, 1000)
     }
   }, [flippedIndexes]);
 
