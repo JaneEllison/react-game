@@ -107,6 +107,25 @@ function App() {
               >
                 Back
               </button>
+              Change theme:
+              <span class="switcher switcher__theme">
+                <input type="checkbox" id="switcher-2" />
+                <label for="switcher-2"></label>
+              </span>
+              <div className='sound__settings'>
+                <div className='sound__block'>
+                  Sound Settings 
+                  <div className='sound'>
+                    <div className='sound__icon on' />
+                  </div>
+                </div>
+                <div className='sound__block'>
+                  Music Settings 
+                  <div className='sound'>
+                    <div className='music__icon on' />
+                  </div>
+                </div>
+              </div>
             </div>
             )
           : (
