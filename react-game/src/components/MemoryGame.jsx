@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
-import useSound from 'use-sound';
 import  Card from './Card';
 import images from '../constants/abstract'
-import sounds from '../constants/sounds'
-
-const { themeMusic, chooseSound, rightSouns, wrongSound, finishSound } = sounds;
 
 const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch, 
   setStopwatchSeconds, movesCount, setMovesCount, setIsGameStarted, stopwatchSeconds }) => {

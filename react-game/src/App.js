@@ -1,8 +1,13 @@
 import './App.css';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
+import useSound from 'use-sound';
 import MemoryGame from './components/MemoryGame';
 import Time from './components/Time';
 import { ThemeButtons, DifficultButtons } from './constants/buttons';
+import sounds from './constants/sounds'
+
+const [ themeMusic, chooseSound, rightSouns, wrongSound, finishSound ] = sounds;
+
 
 function App() {
   const [options, setOptions] = useState({
@@ -10,6 +15,10 @@ function App() {
     theme: null,
   });
   const [isRunningStopwatch, setIsRunningStopwatch] = useState(false);
+
+  const [isSoundOn, setIsSoundOn] = useState(true);
+  const [isMusicOn, setIsMusicOn] = useState(true);
+  
   const [stopwatchSeconds, setStopwatchSeconds] = useState(0);
   const [movesCount, setMovesCount] = useState(0);
   const [highScore, setHighScore] = useState(0);
@@ -26,12 +35,44 @@ function App() {
   const [isGameStarted, setIsGameStarted] = useState(false);
   // const [gameStats, setGameStats] = useState();
 
+  const changeSoundState = () =>{
+    setIsSoundOn(!isSoundOn);
+  };
+
+  const changeMusicState = () =>{
+    setIsMusicOn(!isMusicOn);
+    handleMuteMusic();
+  };
+
+  let audioPlayer;
+
+  const initPlayer = () => {
+    audioPlayer = document.getElementById('music');
+  };
+
+  const handleMuteMusic = () => {
+    if (isMusicOn) {
+      setTimeout(() => {
+        audioPlayer.muted=true;
+      }, 0);
+    } else {
+      setTimeout(() => {
+        audioPlayer.muted=false;
+      }, 0);
+    }
+  };
+
+  useLayoutEffect(() => {
+    initPlayer();
+  });
+
   useEffect(() => {
     const json = localStorage.getItem('memorygamehighscore');
     const savedScore = JSON.parse(json);
     if (savedScore) {
       setHighScore(savedScore);
     }
+    audioPlayer.play();
   }, []);
   return (
     <div className="App">
@@ -50,9 +91,51 @@ function App() {
         />
       </header>
       <main>
+        <audio
+          src={themeMusic}
+          id='music'
+          loop={true}
+        />
         { !isGameStarted
           ? (
             <div className="difficult__buttons">
+              Change theme:
+              <span className="switcher switcher__theme">
+                <input type="checkbox" id="switcher__theme" />
+                <label htmlFor="switcher__theme"></label>
+              </span>
+              <div className='sound__settings'>
+                <div className='sound__block'>
+                  Sound Settings:
+                  <div className='sound__range_icon'>
+                    <div className='sound'>
+                      <div 
+                        className={isSoundOn ? 'sound__icon on' : 'sound__icon off'}
+                        onClick={changeSoundState}
+                      />
+                    </div>
+                    <div className='sound__range'>
+                      <input type="range" id="points" name="points" min="0" max="10"></input>
+                      <label for="points">100%</label>
+                    </div>
+                  </div>
+                </div>
+                <div className='sound__block'>
+                  Music Settings:
+                  <div className='sound__range_icon'>
+                    <div className='sound'>
+                      <div 
+                        className={isMusicOn ? 'music__icon on' : 'music__icon off'}
+                        onClick={changeMusicState}
+                      />
+                    </div>
+                    <div className='sound__range'>
+                        <input type="range" id="points" name="points" min="0" max="10"></input>
+                        <label for="points">100%</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <h2>Choose a difficulty:</h2>
               {DifficultButtons.map((button)=>(
                 <button 
@@ -107,25 +190,6 @@ function App() {
               >
                 Back
               </button>
-              Change theme:
-              <span class="switcher switcher__theme">
-                <input type="checkbox" id="switcher-2" />
-                <label for="switcher-2"></label>
-              </span>
-              <div className='sound__settings'>
-                <div className='sound__block'>
-                  Sound Settings 
-                  <div className='sound'>
-                    <div className='sound__icon on' />
-                  </div>
-                </div>
-                <div className='sound__block'>
-                  Music Settings 
-                  <div className='sound'>
-                    <div className='music__icon on' />
-                  </div>
-                </div>
-              </div>
             </div>
             )
           : (

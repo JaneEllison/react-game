@@ -155,13 +155,22 @@ button:focus {
 }
 
 .sound {
-   width: 20px;
-   height: 20px;
-   padding: 3px;
-   margin-top: 10px;
-   background-color: #fff;
-   border-radius: 25px;
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+  background-color: #fff;
+  border-radius: 25px;
 }
+
+.sound__range{
+  display: flex;
+  align-items: center;
+}
+
+.sound__range_icon{
+  display: flex;
+}
+
 .sound__icon.on {
    background-image: url(./assets/sound-off-icon.png);
    background-size: contain;
@@ -275,7 +284,7 @@ body span.switcher.switcher__theme input:not(:checked) + label {
  body span.switcher.switcher__theme label {
    top: 0px;
    width: 400px;
-   height: 60px;
+   height: 50px;
    border-radius: 25px;
 }
  
