@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSpring, animated as a } from "react-spring";
-import sounds from '../constants/sounds'
+import sounds from '../../constants/sounds'
 
 const Card = ({
   id,
@@ -10,10 +10,11 @@ const Card = ({
   setFlippedCount,
   flippedIndexes,
   setFlippedIndexes,
-  movesCount, 
+  movesCount,
   setMovesCount,
   playSound,
   setCurrentTrack,
+  field,
 }) => {
   const [flipped, setFlipped] = useState(false);
   const {transform, opacity} = useSpring({
@@ -57,14 +58,14 @@ const Card = ({
   return (
     <div onClick={onCardClick}>
       <a.div
-        className="c back"
+        className={`c back ${field}`}
         style={{
           opacity: opacity.interpolate(o => 1 - o),
           transform,
         }}
       />
       <a.div
-        className="c front"
+        className={`c front ${field}`}
         style={{
           opacity,
           transform: transform.interpolate(t => `${t} rotateX(180deg)`),

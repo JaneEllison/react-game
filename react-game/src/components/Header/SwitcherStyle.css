@@ -1,0 +1,97 @@
+body span.switcher {
+  position: absolute;
+  right: 30px;
+  top: 0;
+  width: 120px;
+  height: 30px;
+  border-radius: 25px;
+  margin: 17px 0;
+}
+body span.switcher__theme input {
+  appearance: none;
+  position: relative;
+  width: 120px;
+  height: 30px;
+  border-radius: 25px;
+  background-color: #1E1E1E;
+  outline: none;
+  font-family: 'Oswald', sans-serif;
+}
+body span.switcher input:before, body span.switcher input:after {
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #FFFFFF;
+}
+body span.switcher input:before {
+  content: '';
+  background-image: url(../../assets/sun-icon.png);
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  left: 20px;
+}
+body span.switcher input:after {
+  content: '';
+  background-image: url(../../assets/moon-icon.png);
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  right: 20px;
+}
+body span.switcher label {
+  z-index: 1;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  border-radius: 20px;
+}
+body span.switcher.switcher__theme {
+  overflow: hidden;
+}
+body span.switcher.switcher__theme input {
+  transition: background-color 0s 0.5s;
+}
+body span.switcher.switcher__theme input:before {
+  color: #1E1E1E;
+}
+body span.switcher.switcher__theme input:after {
+  color: #FFFFFF;
+}
+body span.switcher.switcher__theme input:checked {
+  background-color: #FFFFFF;
+}
+body span.switcher.switcher__theme input:checked + label {
+  background: #FFFFFF;
+  animation: turn-on 0.5s ease-out;
+}
+@keyframes turn-on {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: 0%;
+  }
+}
+body span.switcher.switcher__theme input:not(:checked) {
+  background: #1E1E1E;
+}
+body span.switcher.switcher__theme input:not(:checked) + label {
+  background: #1E1E1E;
+  animation: turn-off 0.5s ease-out;
+}
+@keyframes turn-off {
+  0% {
+    right: 100%;
+  }
+  100% {
+    right: 0%;
+  }
+}
+body span.switcher.switcher__theme label {
+  top: 0px;
+  width: 400px;
+  height: 50px;
+  border-radius: 25px;
+}

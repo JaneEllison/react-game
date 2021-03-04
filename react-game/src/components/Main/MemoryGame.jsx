@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import  Card from './Card';
-import images from '../constants/abstract';
-import sounds from '../constants/sounds'
+import Card from '../Main/Card';
+import images from '../../constants/abstract';
+import sounds from '../../constants/sounds'
 
 const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch, 
   setStopwatchSeconds, movesCount, setMovesCount, setIsGameStarted, stopwatchSeconds,
@@ -15,15 +15,14 @@ const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch,
   const minutes = Math.floor(stopwatchSeconds / 60);
   const seconds = Math.floor(stopwatchSeconds % 60);
 
-  // const [currentImages, setCurrentImages] = useState(null);
+  const [currentImages, setCurrentImages] = useState(null);
 
-  // useEffect(() => {
-  //   switch (options.theme) {
-  //     case 'Abstract':
-          // let a=images.abstract
-        // setCurrentImages(images.abstract);
-      // case 'Animals':
-      //   currentImages = images.animals;
+  useEffect(() => {
+    switch (options.theme) {
+      case 'Abstract':
+        setCurrentImages(images.abstract);
+      case 'Animals':
+        setCurrentImages(images.animals);
       // case 'Doggo':
       //   currentImages = images.doggo;
       // case 'Eat':
@@ -44,8 +43,22 @@ const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch,
       //   currentImages = images.summer;
       // case 'Technologies':
       //   currentImages = images.tech;
-    // }
-  // }, [options.theme]);
+    }
+  }, [options.theme]);
+
+  const [field, setField] = useState('');
+
+  useEffect(() => {
+    if(options.difficult == 12) {
+      setField('field__easy');
+    }
+    if(options.difficult == 18) {
+      setField('field__normal');
+    }
+    if(options.difficult == 24){
+      setField('field__difficult');
+    }
+  }, [options.difficult]);
 
   useEffect(() => {
     const newGame = [];
@@ -53,13 +66,13 @@ const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch,
       const firstOption = {
         id: 2 * i,
         imgId: i,
-        image: images.doggo[i],
+        image: images.eat[i],
         flipped: false,
       };
       const secondOption = {
         id: 2 * i + 1,
         imgId: i,
-        image: images.doggo[i],
+        image: images.eat[i],
         flipped: false,
       };
 
@@ -124,9 +137,11 @@ const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch,
     <div>
       {(game.length === 0)
         ? 'loading'
-        : <div className="cards">
+        : <div
+            className="cards"
+          >
             {game.map((card, index) => (
-              <div className="card" key={index}>
+              <div className={`card ${field}`} key={index}>
                 <Card
                   id={index}
                   image={card.image}
@@ -139,6 +154,7 @@ const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch,
                   setMovesCount={setMovesCount}
                   playSound={playSound}
                   setCurrentTrack={setCurrentTrack}
+                  field={field}
                 />
               </div>
             ))}

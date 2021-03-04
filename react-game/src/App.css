@@ -8,16 +8,20 @@
 }
 
 .App-header {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: rgb(0, 0, 0);
 }
 
-.statistic {
-  width: 20%;
-  display: flex;
-  justify-content: space-between;
+h1 {
+  font-family: Comic Sans MS, monospace;
+  width: 100%;
+  margin: 0;
+  padding: 10px 0;
+  margin-bottom: 10px;
 }
 
 body {
@@ -31,14 +35,6 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-}
-
-.difficult__buttons {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 button {
@@ -59,6 +55,104 @@ button:disabled {
 }
 button:disabled:hover {
   background: #fffff681;
+}
+
+.restart__button {
+  margin-right: 8px;
+}
+
+.statistic {
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.main__container{
+  height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.sound__settings {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.sound__block {
+  display: flex;
+  flex-direction: column;
+}
+
+.sound {
+ width: 20px;
+ height: 20px;
+ padding: 3px;
+ background-color: #fff;
+ border-radius: 25px;
+}
+
+.sound__range{
+ display: flex;
+ align-items: center;
+}
+
+.sound__range_icon{
+ display: flex;
+}
+
+.sound__icon.on {
+  background-image: url(./assets/sound-off-icon.png);
+  background-size: contain;
+  height: 100%;
+}
+
+.sound__icon.off {
+  background-image: url(./assets/sound-on-icon.png);
+  background-size: contain;
+  height: 100%;
+}
+
+.music__icon.on {
+  background-image: url(./assets/music-on-icon.png);
+  background-size: contain;
+  height: 100%;
+}
+
+.music__icon.off {
+  background-image: url(./assets/music-off-icon.png);
+  background-size: contain;
+  height: 100%;
+}
+
+.first__block_settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.difficulty__container {
+  width: 30%;
+}
+
+.difficult__buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.difficult__button {
+  width: 60%;
+}
+
+.start__button {
+  margin-right: 8px;
 }
 
 .bg__settings {
@@ -101,7 +195,7 @@ button:focus {
 }
 
 .cards {
-  width: 80%;
+  width: 85%;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -111,8 +205,8 @@ button:focus {
 }
 
 .card {
-  width: 160px;
-  height: 160px;
+  width: 100px;
+  height: 100px;
 }
 
 .active {
@@ -121,8 +215,8 @@ button:focus {
 
 .c {
   position: absolute;
-  max-width: 160px;
-  max-height: 160px;
+  max-width: 100px;
+  max-height: 100px;
   width: 50ch;
   height: 50ch;
   cursor: pointer;
@@ -142,149 +236,44 @@ button:focus {
   background-color: #ffffff;
 }
 
-.sound__settings {
-   display: flex;
-   width: 60%;
-   align-items: center;
-   justify-content: space-around;
+.field__easy {
+  width: 150px;
+  height: 150px;
+  max-width: 150px;
+  max-height: 150px;
+}
+.field__normal {
+  width: 120px;
+  height: 120px;
+  max-width: 120px;
+  max-height: 120px;
+}
+.field__difficult {
+  width: 100px;
+  height: 100px;
+  max-width: 100px;
+  max-height: 100px;
 }
 
-.sound__block {
-   display: flex;
-   flex-direction: column;
+.footer {
+  height: 60px;
+  width: 100%;
 }
 
-.sound {
-  width: 20px;
-  height: 20px;
-  padding: 3px;
-  background-color: #fff;
-  border-radius: 25px;
-}
-
-.sound__range{
+.footer__container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: rgb(0, 0, 0);
 }
 
-.sound__range_icon{
-  display: flex;
+.rs__logo {
+  width: 100px;
+  background-color: #fff;
 }
 
-.sound__icon.on {
-   background-image: url(./assets/sound-off-icon.png);
-   background-size: contain;
-   height: 100%;
+.creator__link {
+  text-decoration: none;
+  color: #fff;
 }
-.sound__icon.off {
-   background-image: url(./assets/sound-on-icon.png);
-   background-size: contain;
-   height: 100%;
-}
-.music__icon.on {
-   background-image: url(./assets/music-on-icon.png);
-   background-size: contain;
-   height: 100%;
-}
-.music__icon.off {
-   background-image: url(./assets/music-off-icon.png);
-   background-size: contain;
-   height: 100%;
-}
-
-body span.switcher {
-   position: relative;
-   width: 120px;
-   height: 30px;
-   border-radius: 25px;
-   margin: 20px 0;
-}
-body span.switcher__theme input {
-   appearance: none;
-   position: relative;
-   width: 120px;
-   height: 30px;
-   border-radius: 25px;
-   background-color: #1E1E1E;
-   outline: none;
-   font-family: 'Oswald', sans-serif;
-}
-body span.switcher input:before, body span.switcher input:after {
-   z-index: 2;
-   position: absolute;
-   top: 50%;
-   transform: translateY(-50%);
-   color: #FFFFFF;
-}
-body span.switcher input:before {
-   content: '';
-   background-image: url(./assets/sun-icon.png);
-   background-size: contain;
-   width: 20px;
-   height: 20px;
-   left: 20px;
-}
-body span.switcher input:after {
-   content: '';
-   background-image: url(./assets/moon-icon.png);
-   background-size: contain;
-   width: 20px;
-   height: 20px;
-   right: 20px;
-}
-body span.switcher label {
-   z-index: 1;
-   position: absolute;
-   top: 10px;
-   bottom: 10px;
-   border-radius: 20px;
-}
-body span.switcher.switcher__theme {
-   overflow: hidden;
-}
-body span.switcher.switcher__theme input {
-   transition: background-color 0s 0.5s;
-}
-body span.switcher.switcher__theme input:before {
-   color: #1E1E1E;
-}
-body span.switcher.switcher__theme input:after {
-   color: #FFFFFF;
-}
-body span.switcher.switcher__theme input:checked {
-   background-color: #FFFFFF;
-}
-body span.switcher.switcher__theme input:checked + label {
-   background: #FFFFFF;
-   animation: turn-on 0.5s ease-out;
-}
-@keyframes turn-on {
-   0% {
-     left: 100%;
-   }
-   100% {
-     left: 0%;
-   }
-}
-body span.switcher.switcher__theme input:not(:checked) {
-   background: #1E1E1E;
-}
-body span.switcher.switcher__theme input:not(:checked) + label {
-   background: #1E1E1E;
-   animation: turn-off 0.5s ease-out;
-}
-@keyframes turn-off {
-   0% {
-     right: 100%;
-   }
-   100% {
-     right: 0%;
-   }
-}
- body span.switcher.switcher__theme label {
-   top: 0px;
-   width: 400px;
-   height: 50px;
-   border-radius: 25px;
-}
- 

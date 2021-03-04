@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const Timer = ({ isRunningStopwatch, stopwatchSeconds, setStopwatchSeconds, movesCount }) => {
+const Counter = ({ isRunningStopwatch, stopwatchSeconds, setStopwatchSeconds, movesCount }) => {
   const changeSeconds = (seconds) => {
     setStopwatchSeconds(seconds);
   };
@@ -31,4 +31,4 @@ const Timer = ({ isRunningStopwatch, stopwatchSeconds, setStopwatchSeconds, move
   )
 }
 
-export default Timer;
+export default Counter;
