@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Card from '../Main/Card';
 import images from '../../constants/abstract';
-import sounds from '../../constants/sounds'
+import sounds from '../../constants/sounds';
+
+const finishSound = [...sounds].pop();
 
 const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch, 
   setStopwatchSeconds, movesCount, setMovesCount, setIsGameStarted, stopwatchSeconds,
@@ -76,9 +78,11 @@ const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch,
         setMovesCount(0);
         setStopwatchSeconds(0);
         setIsGameStarted(false);
+        
+        setCurrentTrack(finishSound);
+        playSound();
+
         if (newGame) {
-          setCurrentTrack(sounds.finishSound);
-          playSound();
           setTimeout(() => {
           setIsGameStarted(true);
           }, 5);
