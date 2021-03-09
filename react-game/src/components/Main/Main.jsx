@@ -6,6 +6,7 @@ import NavButtons from './MenuComponents/NavButtons';
 import GameButtons from './GameComponents/GameButtons';
 import sounds from '../../constants/sounds'
 import MemoryGame from './GameComponents/MemoryGame'
+import EndGamePopup from './GameComponents/EndGamePopup'
 
 const [themeMusic] = sounds;
 
@@ -21,11 +22,12 @@ const Main = ({
   setIsRunningStopwatch,
   highScore,
   setHighScore,
-  stopwatchSeconds,
   movesCount,
+  stopwatchSeconds,
 }) => {
   const [field, setField] = useState('');
   const [currentImages, setCurrentImages] = useState(null);
+  const [isGameFinished, setIsGameFinished] = useState(false);
 
   const [isSoundOn, setIsSoundOn] = useState(true);
   const [soundValue, setSoundValue] = useState(0.5);
@@ -101,11 +103,19 @@ const Main = ({
     setIsGameStarted(true);
     setStopwatchSeconds(0);
     setMovesCount(0);
+    setIsGameFinished(false);
   };
 
-  const backToMenu = () => {
+  const backToGame = () => {
     setIsGameStarted(true);
     setIsRunningStopwatch(true);
+  }
+
+  const backToMenu = () => {
+    setMovesCount(0);
+    setStopwatchSeconds(0);
+    setIsGameFinished(false);
+    setIsGameStarted(false);
   }
 
   return (
@@ -118,6 +128,13 @@ const Main = ({
       <audio
         src={currentTrack}
         id='sound'
+      />
+      <EndGamePopup
+        isGameFinished={isGameFinished}
+        stopwatchSeconds={stopwatchSeconds}
+        movesCount={movesCount}
+        startNewGame={startNewGame}
+        backToMenu={backToMenu}
       />
       {!isGameStarted
         ? (
@@ -156,7 +173,7 @@ const Main = ({
             </div>
             <NavButtons
               startNewGame={startNewGame}
-              backToMenu={backToMenu}
+              backToGame={backToGame}
               options={options}
             />
           </>
@@ -184,6 +201,7 @@ const Main = ({
               field={field}
               setFiel={setField}
               currentImages={currentImages}
+              setIsGameFinished={setIsGameFinished}
             />
           </>
         )

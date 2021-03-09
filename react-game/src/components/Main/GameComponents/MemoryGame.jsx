@@ -6,7 +6,7 @@ const finishSound = [...sounds].pop();
 
 const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch, 
   setStopwatchSeconds, movesCount, setMovesCount, setIsGameStarted, stopwatchSeconds,
-  playSound, setCurrentTrack, field, currentImages }) => {
+  playSound, setCurrentTrack, field, currentImages, setIsGameFinished }) => {
 
   const [game, setGame] = useState([]);
   const [flippedCount, setFlippedCount] = useState(0);
@@ -42,7 +42,8 @@ const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch,
   }, [currentImages]);
 
   useEffect(() => {
-    const finished = !game.some(card => !card.flipped)
+    const finished = !game.some(card => !card.flipped);
+
     if (finished && game.length > 0) {
       setTimeout(() => {
         let score=movesCount;
@@ -51,24 +52,12 @@ const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch,
           const json = JSON.stringify(score);
           localStorage.setItem('memorygamehighscore', json);
         }
-
-        const newGame = window.confirm(`Wow!, SCORE:${score} TIME:${formatTime(minutes)}:${formatTime(seconds)} New Game?`);
-        setMovesCount(0);
-        setStopwatchSeconds(0);
-        setIsGameStarted(false);
-        
         setCurrentTrack(finishSound);
         playSound();
-
-        if (newGame) {
-          setTimeout(() => {
-          setIsGameStarted(true);
-          }, 5);
-        }
-        else {
-          setIsRunningStopwatch(false);
-        }
-      }, 500);
+      }, 1000)
+      setIsGameFinished(true);
+      setIsGameStarted(false);
+      setIsRunningStopwatch(false);
     }
   }, [game]);
 

@@ -59,7 +59,6 @@ function App() {
         setHighScore={setHighScore}
         stopwatchSeconds={stopwatchSeconds}
         movesCount={movesCount}
-
       />
       <Footer />
     </div>
