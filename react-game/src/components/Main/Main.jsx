@@ -1,11 +1,11 @@
 import React, { useState, useLayoutEffect } from "react";
-import SoundSettings from '../Main/SoundsSettings';
-import DifficultSettings from '../Main/DifficultSettings';
-import ThemeSettings from '../Main/ThemeSettings';
-import NavButtons from '../Main/NavButtons';
-import GameButtons from '../Main/GameButtons';
+import SoundSettings from './MenuComponents/SoundsSettings';
+import DifficultSettings from './MenuComponents/DifficultSettings';
+import ThemeSettings from './MenuComponents/ThemeSettings';
+import NavButtons from './MenuComponents/NavButtons';
+import GameButtons from './GameComponents/GameButtons';
 import sounds from '../../constants/sounds'
-import MemoryGame from '../Main/MemoryGame'
+import MemoryGame from './GameComponents/MemoryGame'
 
 const [themeMusic] = sounds;
 
@@ -24,6 +24,9 @@ const Main = ({
   stopwatchSeconds,
   movesCount,
 }) => {
+  const [field, setField] = useState('');
+  const [currentImages, setCurrentImages] = useState(null);
+
   const [isSoundOn, setIsSoundOn] = useState(true);
   const [soundValue, setSoundValue] = useState(0.5);
   const [currentTrack, setCurrentTrack] = useState(null);
@@ -138,6 +141,8 @@ const Main = ({
                 options={options}
                 setOptions={setOptions}
                 chooseCurrentOption={chooseCurrentOption}
+                field={field}
+                setField={setField}
               />
             </div>
             <div className="second__block_settings">
@@ -146,6 +151,7 @@ const Main = ({
                 setOptions={setOptions}
                 options={options}
                 chooseCurrentOption={chooseCurrentOption}
+                setCurrentImages={setCurrentImages}
               />
             </div>
             <NavButtons
@@ -175,6 +181,9 @@ const Main = ({
               setIsGameStarted={setIsGameStarted}
               playSound={playSound}
               setCurrentTrack={setCurrentTrack}
+              field={field}
+              setFiel={setField}
+              currentImages={currentImages}
             />
           </>
         )

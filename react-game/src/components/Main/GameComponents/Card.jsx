@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSpring, animated as a } from "react-spring";
-import sounds from '../../constants/sounds'
+import sounds from '../../../constants/sounds'
 
 const [themeMusic, rightSouns, wrongSound, finishSound] = sounds;
 

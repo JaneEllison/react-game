@@ -1,12 +1,25 @@
-import { DifficultButtons } from '../../constants/buttons';
+import React, { useEffect } from "react";
+import { DifficultButtons } from '../../../constants/buttons';
 
 const DifficultSettings = ({
   currentOptions,
   options,
   setOptions,
-  chooseCurrentOption,
+  chooseCurrentOption, 
+  setField,
 }) => {
-
+  useEffect(() => {
+    if(options.difficult == 12) {
+      setField('field__easy');
+    }
+    if(options.difficult == 18) {
+      setField('field__normal');
+    }
+    if(options.difficult == 24){
+      setField('field__difficult');
+    }
+  }, [options.difficult]);
+  
   return (
     <div className='difficulty__container'>
       <h3>Choose a difficulty:</h3>

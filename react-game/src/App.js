@@ -7,7 +7,7 @@ import Footer from './components/Footer/Footer'
 function App() {
   const [options, setOptions] = useState({
     difficult: null,
-    theme: null,
+    theme: 'stars',
   });
 
   const [currentOptions, setCurrentOptions] = useState({

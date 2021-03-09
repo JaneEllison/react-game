@@ -1,11 +1,19 @@
-import { ThemeButtons } from '../../constants/buttons';
+import React, { useEffect } from "react";
+import { ThemeButtons } from '../../../constants/buttons';
+import images from '../../../constants/themes';
 
 const ThemeSettings = ({
   currentOptions,
   setOptions,
   options,
   chooseCurrentOption,
+  setCurrentImages,
 }) => {
+  useEffect(() => {
+    let theme = options.theme.toLowerCase();
+    setCurrentImages(images[theme])
+  }, [options.theme]);
+
   return (
     <div>
       <h3>Choose a theme:</h3>

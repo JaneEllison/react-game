@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Card from '../Main/Card';
-import images from '../../constants/abstract';
-import sounds from '../../constants/sounds';
+import Card from './Card';
+import sounds from '../../../constants/sounds';
 
 const finishSound = [...sounds].pop();
 
 const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch, 
   setStopwatchSeconds, movesCount, setMovesCount, setIsGameStarted, stopwatchSeconds,
-  playSound, setCurrentTrack, }) => {
+  playSound, setCurrentTrack, field, currentImages }) => {
 
   const [game, setGame] = useState([]);
   const [flippedCount, setFlippedCount] = useState(0);
@@ -16,27 +15,6 @@ const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch,
   const formatTime = (time) => `${(time < 10 ? '0' : '')}${time}`;
   const minutes = Math.floor(stopwatchSeconds / 60);
   const seconds = Math.floor(stopwatchSeconds % 60);
-
-  const [currentImages, setCurrentImages] = useState(null);
-
-  useEffect(() => {
-    let theme = options.theme.toLowerCase();
-    setCurrentImages(images[theme])
-  }, [options.theme]);
-
-  const [field, setField] = useState('');
-
-  useEffect(() => {
-    if(options.difficult == 12) {
-      setField('field__easy');
-    }
-    if(options.difficult == 18) {
-      setField('field__normal');
-    }
-    if(options.difficult == 24){
-      setField('field__difficult');
-    }
-  }, [options.difficult]);
 
   useEffect(() => {
     const newGame = [];
