@@ -2,7 +2,6 @@ body span.switcher {
   position: absolute;
   right: 30px;
   top: 0;
-  width: 120px;
   height: 30px;
   border-radius: 25px;
   margin: 17px 0;
@@ -94,4 +93,25 @@ body span.switcher.switcher__theme label {
   width: 400px;
   height: 50px;
   border-radius: 25px;
+}
+
+@media only screen and (max-width: 529px){
+  body span.switcher__theme input {
+    width: 60px;
+  }
+}
+
+@media only screen and (max-width: 400px){
+  h1 {
+    margin: 0;
+  }
+  body span.switcher {
+    position: relative;
+    right:0;
+    top: 0;
+    height: 30px;
+    border-radius: 25px;
+    margin: 0;
+    margin-bottom: 10px;
+  }
 }

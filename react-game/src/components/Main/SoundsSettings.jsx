@@ -55,6 +55,7 @@ const SoundSettings = ({
             <input type="range"
               id="sound"
               name="sound"
+              className="sound__range"
               min="0"
               max="1"
               step='0.01'

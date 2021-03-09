@@ -39,7 +39,7 @@ body {
 
 button {
   width: 20%;
-  background: #fc422ab7;
+  background: #383838e5;
   border-radius: 4px;
   font-weight: 700;
   color: #fff;
@@ -69,7 +69,7 @@ button:disabled:hover {
 }
 
 .main__container{
-  height: calc(100vh - 200px);
+  height: calc(100vh - 150px);
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -177,7 +177,7 @@ button:disabled:hover {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: #fc422ab7;
+  background-color: #383838e5;
   border-radius: 4px;
   font-weight: 700;
   color: #fff;
@@ -187,7 +187,7 @@ button:disabled:hover {
 }
 
 button:hover {
-  background: #b41703b7;
+  background: #070707e5;
 }
 
 button:focus {
@@ -195,7 +195,8 @@ button:focus {
 }
 
 .cards {
-  width: 85%;
+  width: 750px;
+  padding: 5px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -210,7 +211,7 @@ button:focus {
 }
 
 .active {
-  background: #851000b7;
+  background: #000000b7;
 }
 
 .c {
@@ -229,11 +230,15 @@ button:focus {
 }
 
 .back {
-  background-image: url(./assets/neon/3.jpg);
+  background-image: url(./assets/card-bg.jpg);
 }
 
 .front {
   background-color: #ffffff;
+}
+
+label {
+  width: 40px;
 }
 
 .field__easy {
@@ -243,8 +248,8 @@ button:focus {
   max-height: 150px;
 }
 .field__normal {
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   max-width: 120px;
   max-height: 120px;
 }
@@ -276,4 +281,50 @@ button:focus {
 .creator__link {
   text-decoration: none;
   color: #fff;
+}
+
+@media only screen and (max-width: 768px){
+  .statistic {
+    width: 40%;
+  }
+  .difficulty__container {
+    width: 40%;
+  }
+  .sound__settings {
+    width: 40%;
+  }
+  .cards {
+    width: 500px;
+  }
+  .main__container{
+    height: fit-content;
+  }
+}
+
+@media only screen and (max-width: 529px){
+  button{
+    width: 40%;
+  }
+
+  body span.switcher__theme input {
+    width: 90px;
+  }
+  
+  .first__block_settings{
+    flex-direction: column;
+  }
+
+  .difficulty__container {
+    width: 80%;
+  }
+
+  .cards {
+    width: 350px;
+  }
+}
+
+@media only screen and (max-width: 380px){
+    .cards {
+    width: 300px;
+  }
 }

@@ -18,32 +18,8 @@ const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch,
   const [currentImages, setCurrentImages] = useState(null);
 
   useEffect(() => {
-    switch (options.theme) {
-      case 'Abstract':
-        setCurrentImages(images.abstract);
-      case 'Animals':
-        setCurrentImages(images.animals);
-      // case 'Doggo':
-      //   currentImages = images.doggo;
-      // case 'Eat':
-      //   currentImages = images.eat;
-      // case 'Fire':
-      //   currentImages = images.fre;
-      // case 'Flora':
-      //   currentImages = images.flora;
-      // case 'Landscape':
-      //   currentImages = images.land;
-      // case 'Neon':
-      //   currentImages = images.neon;
-      // case 'Sea':
-      //   currentImages = images.sea;
-      // case 'Stars':
-      //   currentImages = images.stars;
-      // case 'Summer':
-      //   currentImages = images.summer;
-      // case 'Technologies':
-      //   currentImages = images.tech;
-    }
+    let theme = options.theme.toLowerCase();
+    setCurrentImages(images[theme])
   }, [options.theme]);
 
   const [field, setField] = useState('');
@@ -66,13 +42,13 @@ const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch,
       const firstOption = {
         id: 2 * i,
         imgId: i,
-        image: images.eat[i],
+        image: currentImages?.[i],
         flipped: false,
       };
       const secondOption = {
         id: 2 * i + 1,
         imgId: i,
-        image: images.eat[i],
+        image: currentImages?.[i],
         flipped: false,
       };
 
@@ -83,7 +59,7 @@ const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch,
     const shuffledGame = newGame.sort(() => Math.random() - 0.5);
     setGame(shuffledGame);
     setIsRunningStopwatch(true);
-  }, []);
+  }, [currentImages]);
 
   useEffect(() => {
     const finished = !game.some(card => !card.flipped)

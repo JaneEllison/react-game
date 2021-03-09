@@ -10,7 +10,7 @@ const NavButtons = ({
         onClick={startNewGame}
         disabled={options.difficult === null || options.theme === null}
       >
-        Start new game
+        New game
       </button>
       <button
         onClick={backToMenu}

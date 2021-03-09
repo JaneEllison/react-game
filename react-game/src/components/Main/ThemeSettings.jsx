@@ -1,7 +1,5 @@
 import { ThemeButtons } from '../../constants/buttons';
 
-
-
 const ThemeSettings = ({
   currentOptions,
   setOptions,
