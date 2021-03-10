@@ -42,8 +42,8 @@ body span.switcher input:after {
 body span.switcher label {
   z-index: 1;
   position: absolute;
-  top: 10px;
-  bottom: 10px;
+  top: 20px;
+  bottom: 20px;
   border-radius: 20px;
 }
 body span.switcher.switcher__theme {
@@ -90,7 +90,7 @@ body span.switcher.switcher__theme input:not(:checked) + label {
 }
 body span.switcher.switcher__theme label {
   top: 0px;
-  width: 400px;
+  width: 140px;
   height: 50px;
   border-radius: 25px;
 }

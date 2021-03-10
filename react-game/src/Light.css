@@ -1,34 +1,8 @@
-:root {
-  --color-text: rgb(255, 255, 255);
-
-  --color-text-header: #ffffff;
-  --bg-color-header: rgba(0, 0, 0, 0.76);
-  --bg-image-header: url(./assets/header-dark.jpg);
-
-  --bg-color-app: #1a1a1a;
-  --bg-image-main-container: url(./assets/body-dark.jpg);
-
-  --bg-color-popup: rgb(0, 0, 0);
-  --bg-image-popup: url(./assets/popup_bg.png);
-
-  --bg-color-popup-finish-button: #383838;
-  --text-color-popup-finish-button: #fff;
-
-  --bg-color-button: #202020fd;
-  --text-color-button: #fff;
-  --bg-color-button-disabled: #afafae81;
-  --bg-color-button-hover: #000000e5;
-  --bg-color-button-active: #000000e5;
-
-  --bg-color-card:#383838e5; 
-  --bg-image-card: url(./assets/card-bg.jpg);
-}
-
 .App {
   text-align: center;
-  background-color: var(--bg-color-app);
-  color: var(--color-text);
+  background-color: #ffffff;
   min-height: 100vh;
+  color: rgb(0, 0, 0);
   font-size: 14px;
   font-family: Arial, sans-serif;
 }
@@ -40,10 +14,10 @@
   z-index: 1;
   top: 20%;
   left: 20%;
-  background-color: var(--bg-color-popup);
+  background-color: rgb(118, 255, 244);
   width: 60vw;
   height: 70vh;
-  background-image: var(--bg-image-popup);
+  background-image: url(./assets/popup_bg.png);
   background-size: cover;
 }
 
@@ -101,10 +75,10 @@
 
 .finish__button {
   width: 60%;
-  background-color: var(--bg-color-popup-finish-button);
+  background: #383838e5;
   border-radius: 4px;
   font-weight: 700;
-  color: var(--text-color-popup-finish-button);
+  color: #fff;
   border: none;
   padding: 7px 15px;
   margin-bottom: 8px;
@@ -117,8 +91,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-color-header);
-  background-image: var(--bg-image-header);
+  color: #ffffff;
+  background-image: url(./assets/header-light.jpg);
   background-size: cover;
 }
 
@@ -145,10 +119,10 @@ body {
 
 button {
   width: 20%;
-  background: var(--bg-color-button);
+  background: #402377d5;
   border-radius: 4px;
   font-weight: 700;
-  color: var(--text-color-button);
+  color: #fff;
   border: none;
   padding: 7px 15px;
   margin-bottom: 8px;
@@ -156,11 +130,11 @@ button {
 }
 
 button:disabled {
-  background: var(--bg-color-button-disabled);
+  background: #0a2da0b4;
   cursor: no-drop;
 }
 button:disabled:hover {
-  background: var(--bg-color-button-disabled);
+  background: #0a2da062;
 }
 
 .restart__button {
@@ -179,7 +153,7 @@ button:disabled:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  background-image: var(--bg-image-main-container);
+  background-image: url(./assets/body-light.jpg);
   background-size: cover;
 }
 
@@ -285,15 +259,17 @@ button:disabled:hover {
   justify-content: center;
   align-items: center;
   width: 100%;
+  background-color: #36225cd5;;
   border-radius: 4px;
   font-weight: 700;
+  color: #fff;
   border: none;
   margin-bottom: 8px;
   cursor: pointer;
 }
 
 button:hover {
-  background: var(--bg-color-button-hover);
+  background: #1b48dbf3;
 }
 
 button:focus {
@@ -317,7 +293,7 @@ button:focus {
 }
 
 .active {
-  background: var(--bg-color-button-active);
+  background: #1b48dbf3;
 }
 
 .c {
@@ -336,11 +312,11 @@ button:focus {
 }
 
 .back {
-  background-image: var(--bg-image-card);
+  background-image: url(./assets/card-bg-light.jpg);
 }
 
 .front {
-  background-color: var(--bg-color-card);
+  background-color: #ffffff;
 }
 
 label {
@@ -348,10 +324,10 @@ label {
 }
 
 .field__easy {
-  width: 143px;
-  height: 143px;
-  max-width: 143px;
-  max-height: 143px;
+  width: 150px;
+  height: 150px;
+  max-width: 150px;
+  max-height: 150px;
 }
 .field__normal {
   width: 110px;
@@ -369,6 +345,8 @@ label {
 .footer {
   height: 60px;
   width: 100%;
+  background-image: url(./assets/popup_bg.png);
+  background-size: cover;
 }
 
 .footer__container {
@@ -376,10 +354,8 @@ label {
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  background-color: var(--bg-color-header);
-  background-image: var(--bg-image-header);
-  background-size: cover;
-  color: var(--color-text-header);
+  background-color: rgb(0, 0, 0);
+  color: #ffffff;
 }
 
 .rs__logo {
@@ -389,7 +365,7 @@ label {
 
 .creator__link {
   text-decoration: none;
-  color: var(--color-text-header);
+  color: #fff;
 }
 
 @media only screen and (max-width: 768px){
