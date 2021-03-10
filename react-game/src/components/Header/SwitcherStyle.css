@@ -9,7 +9,7 @@ body span.switcher {
 body span.switcher__theme input {
   appearance: none;
   position: relative;
-  width: 120px;
+  width: 90px;
   height: 30px;
   border-radius: 25px;
   background-color: #1E1E1E;

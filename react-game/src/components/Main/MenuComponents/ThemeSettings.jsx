@@ -11,7 +11,7 @@ const ThemeSettings = ({
 }) => {
   useEffect(() => {
     let theme = options.theme.toLowerCase();
-    setCurrentImages(images[theme])
+    setCurrentImages(images[theme]);
   }, [options.theme]);
 
   return (

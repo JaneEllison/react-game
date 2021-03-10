@@ -41,7 +41,7 @@ export const ThemeButtons = [
   },
   {
     id: 11,
-    text: 'Techologies',
+    text: 'Technologies',
   },
   {
     id: 12,

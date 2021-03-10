@@ -9,13 +9,13 @@ const DifficultSettings = ({
   setField,
 }) => {
   useEffect(() => {
-    if(options.difficult == 12) {
+    if(options.difficult === 12) {
       setField('field__easy');
     }
-    if(options.difficult == 18) {
+    if(options.difficult === 18) {
       setField('field__normal');
     }
-    if(options.difficult == 24){
+    if(options.difficult === 24){
       setField('field__difficult');
     }
   }, [options.difficult]);

@@ -166,7 +166,7 @@ const images = {
   sea: [sea1, sea2, sea3, sea4, sea5, sea6, sea7, sea8, sea9, sea10, sea11, sea12],
   stars: [stars1, stars2, stars3, stars4, stars5, stars6, stars7, stars8, stars9, stars10, stars11, stars12],
   summer: [summer1, summer2, summer3, summer4, summer5, summer6, summer7, summer8, summer9, summer10, summer11, summer12],
-  tech: [tech1, tech2, tech3, tech4, tech5, tech6, tech7, tech8, tech9, tech10, tech11, tech12],
+  technologies: [tech1, tech2, tech3, tech4, tech5, tech6, tech7, tech8, tech9, tech10, tech11, tech12],
 };
 
 export default images;

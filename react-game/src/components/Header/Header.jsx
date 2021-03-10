@@ -1,17 +1,16 @@
 import '../Header/SwitcherStyle.css'
 import Counter from '../Header/Counter';
 
-
-
 const Header = ({
   highScore,
   isRunningStopwatch,
   stopwatchSeconds,
   setStopwatchSeconds,
   movesCount,
+  toggleTheme,
+  isChecked,
 }) => {
-
-  return (
+    return (
     <header className="App-header">
       <h1>
         Memory Game
@@ -20,6 +19,8 @@ const Header = ({
         <input
           type="checkbox"
           id="switcher__theme"
+          onChange={toggleTheme}
+          checked={isChecked}
         />
         <label htmlFor="switcher__theme"></label>
       </span>

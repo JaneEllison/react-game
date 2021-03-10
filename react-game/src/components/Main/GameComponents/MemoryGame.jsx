@@ -4,17 +4,24 @@ import sounds from '../../../constants/sounds';
 
 const finishSound = [...sounds].pop();
 
-const MemoryGame = ({ options, highScore, setHighScore, setIsRunningStopwatch, 
-  setStopwatchSeconds, movesCount, setMovesCount, setIsGameStarted, stopwatchSeconds,
-  playSound, setCurrentTrack, field, currentImages, setIsGameFinished }) => {
+const MemoryGame = ({ 
+  options,
+  highScore,
+  setHighScore,
+  setIsRunningStopwatch,
+  movesCount,
+  setMovesCount,
+  setIsGameStarted,
+  playSound,
+  setCurrentTrack,
+  field,
+  currentImages,
+  setIsGameFinished
+}) => {
 
   const [game, setGame] = useState([]);
   const [flippedCount, setFlippedCount] = useState(0);
   const [flippedIndexes, setFlippedIndexes] = useState([]);
-
-  const formatTime = (time) => `${(time < 10 ? '0' : '')}${time}`;
-  const minutes = Math.floor(stopwatchSeconds / 60);
-  const seconds = Math.floor(stopwatchSeconds % 60);
 
   useEffect(() => {
     const newGame = [];
