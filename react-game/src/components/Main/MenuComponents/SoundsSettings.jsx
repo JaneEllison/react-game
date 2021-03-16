@@ -11,6 +11,19 @@ const SoundSettings = ({
   setVolumeAudio,
   formatVolume,
 }) => {
+  const changeSoundVolume = (event) => {
+    setSoundValue(event.target.value);
+    setVolumeSound();
+    localStorage.setItem('memorygameissoundon', JSON.stringify(isSoundOn));
+    localStorage.setItem('memorygamesoundvolume', soundValue);
+  };
+
+  const changeMusicVolume = (event) => {
+    setMusicValue(event.target.value);
+    setVolumeAudio();
+    localStorage.setItem('memorygameismusicon', JSON.stringify(isMusicOn));
+    localStorage.setItem('memorygamemusicvolume', musicValue);
+  }
 
   return (
     <div className='sound__settings'>
@@ -32,10 +45,7 @@ const SoundSettings = ({
               max="1"
               step='0.01'
               value={musicValue}
-              onChange={(event) => {
-                setMusicValue(event.target.value);
-                setVolumeAudio();
-              }}
+              onChange={changeMusicVolume}
               disabled={!musicValue}
             />
             <label htmlFor="music">{formatVolume(musicValue)}</label>
@@ -60,10 +70,7 @@ const SoundSettings = ({
               max="1"
               step='0.01'
               value={soundValue}
-              onChange={(event) => {
-                setSoundValue(event.target.value);
-                setVolumeSound();
-              }}
+              onChange={changeSoundVolume}
               disabled={!soundValue}
             />
             <label htmlFor="sound">{formatVolume(soundValue)}</label>

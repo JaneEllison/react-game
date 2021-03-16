@@ -9,9 +9,15 @@ import { lightTheme, darkTheme } from './constants/themeSettings'
 export const ModeContext = createContext('dark');
 
 function App() {
+  const savedTheme = JSON.parse(localStorage.getItem('memorygametheme'));
+  const savedDifficult = JSON.parse(localStorage.getItem('memorygamedifficult'));
+  const savedSeconds = JSON.parse(localStorage.getItem('memorygameseconds'));
+  const savedMoves = JSON.parse(localStorage.getItem('memorygamemoves'));
+  const savedStartGame = JSON.parse(localStorage.getItem('memorygamestart'));
+  
   const [options, setOptions] = useState({
-    difficult: null,
-    theme: 'stars',
+    difficult: savedDifficult || null,
+    theme: savedTheme || 'stars',
   });
 
   const [currentMode, setCurrentMode] = useState('dark');
@@ -41,14 +47,14 @@ function App() {
   };
 
   const [currentOptions, setCurrentOptions] = useState({
-    currentDifficult: null,
+    currentDifficult: savedDifficult || null,
     currentTheme: null,
   });
 
-  const [isGameStarted, setIsGameStarted] = useState(false);
+  const [isGameStarted, setIsGameStarted] = useState(savedStartGame || false);
   const [isRunningStopwatch, setIsRunningStopwatch] = useState(false);
-  const [stopwatchSeconds, setStopwatchSeconds] = useState(0);
-  const [movesCount, setMovesCount] = useState(0);
+  const [stopwatchSeconds, setStopwatchSeconds] = useState(savedSeconds || 0);
+  const [movesCount, setMovesCount] = useState(savedMoves || 0);
   const [highScore, setHighScore] = useState(0);
 
 
@@ -59,11 +65,11 @@ function App() {
   };
 
   useEffect(() => {
-    const json = localStorage.getItem('memorygamehighscore');
-    const savedScore = JSON.parse(json);
+    const highScore = localStorage.getItem('memorygamehighscore');
+    const savedScore = JSON.parse(highScore);
     if (savedScore) {
       setHighScore(savedScore);
-    }
+    };
   }, []);
 
   return (

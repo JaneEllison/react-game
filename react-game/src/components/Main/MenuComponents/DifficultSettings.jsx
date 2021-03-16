@@ -18,7 +18,10 @@ const DifficultSettings = ({
     if(options.difficult === 24){
       setField('field__difficult');
     }
-  }, [options.difficult]);
+
+    const json = JSON.stringify(options.difficult);
+    localStorage.setItem('memorygamedifficult', json);
+  });
   
   return (
     <div className='difficulty__container'>

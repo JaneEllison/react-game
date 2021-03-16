@@ -63,7 +63,7 @@ const MemoryGame = ({
         playSound();
       }, 1000)
       setIsGameFinished(true);
-      setIsGameStarted(false);
+      setIsGameStarted('false');
       setIsRunningStopwatch(false);
     }
   }, [game]);

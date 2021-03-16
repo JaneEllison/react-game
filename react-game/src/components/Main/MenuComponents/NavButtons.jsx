@@ -1,6 +1,6 @@
 const NavButtons = ({
   startNewGame,
-  backToMenu,
+  backToGame,
   options,
 }) => {
   return (
@@ -13,7 +13,7 @@ const NavButtons = ({
         New game
       </button>
       <button
-        onClick={backToMenu}
+        onClick={backToGame}
       >
         Back
       </button>

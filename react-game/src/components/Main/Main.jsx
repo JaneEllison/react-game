@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import SoundSettings from './MenuComponents/SoundsSettings';
 import DifficultSettings from './MenuComponents/DifficultSettings';
 import ThemeSettings from './MenuComponents/ThemeSettings';
@@ -25,20 +25,43 @@ const Main = ({
   movesCount,
   stopwatchSeconds,
 }) => {
+  const savedIsSoundOn = JSON.parse(localStorage.getItem('memorygameissoundon'));
+  const savedSoundVolume = JSON.parse(localStorage.getItem('memorygamesoundvolume'));
+
+  const savedIsMusicOn = JSON.parse(localStorage.getItem('memorygameismusicon'));
+  const savedMusicVolume = JSON.parse(localStorage.getItem('memorygamemusicvolume'));
+
   const [field, setField] = useState('');
   const [currentImages, setCurrentImages] = useState(null);
   const [isGameFinished, setIsGameFinished] = useState(false);
 
   const [isSoundOn, setIsSoundOn] = useState(true);
-  const [soundValue, setSoundValue] = useState(0.5);
+  const [soundValue, setSoundValue] = useState(savedSoundVolume || 0.5);
+
   const [currentTrack, setCurrentTrack] = useState(null);
 
-
   const [isMusicOn, setIsMusicOn] = useState(true);
-  const [musicValue, setMusicValue] = useState(0.5);
+  const [musicValue, setMusicValue] = useState(savedMusicVolume || 0.5);
 
   let audioPlayer;
   let soundPlayer;
+
+  useEffect(() => {
+    if (localStorage.getItem('memorygameissoundon') === false) {
+      // setIsSoundOn(false);
+      // setSoundValue(0);
+    }
+    if (localStorage.getItem('memorygameismusicon')) {
+      // setIsMusicOn(savedIsMusicOn);
+      // setMusicValue(0);
+      // handleMuteMusic();
+    }
+  }, []);
+
+  useEffect(() => {
+    const json = JSON.stringify(isGameStarted);
+    localStorage.setItem('memorygamestart', json);
+  }, [isGameStarted])
 
   const initPlayer = () => {
     audioPlayer = document.getElementById('music');
@@ -55,11 +78,15 @@ const Main = ({
   const changeSoundState = () => {
     setIsSoundOn(!isSoundOn);
     handleMuteSound();
+    localStorage.setItem('memorygameissoundon', JSON.stringify(!isSoundOn));
+    localStorage.setItem('memorygamesoundvolume', soundValue);  
   };
 
   const changeMusicState = () => {
     setIsMusicOn(!isMusicOn);
     handleMuteMusic();
+    localStorage.setItem('memorygameismusicon', JSON.stringify(!isMusicOn));
+    localStorage.setItem('memorygamemusicvolume', musicValue);
   };
 
   const setVolumeAudio = () => {
@@ -68,6 +95,7 @@ const Main = ({
   const setVolumeSound = () => {
     soundPlayer.volume = soundValue;
   };
+
   const playSound = () => {
     soundPlayer.play();
   };
@@ -100,15 +128,20 @@ const Main = ({
   };
 
   const startNewGame = () => {
-    setIsGameStarted(true);
+    setIsGameStarted(false);
     setStopwatchSeconds(0);
     setMovesCount(0);
     setIsGameFinished(false);
+    setTimeout(() => {
+      setIsGameStarted(true);
+    }, 0);
   };
 
   const backToGame = () => {
     setIsGameStarted(true);
     setIsRunningStopwatch(true);
+
+    //брать данные из локал сторадж
   }
 
   const backToMenu = () => {

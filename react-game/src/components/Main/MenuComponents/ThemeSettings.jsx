@@ -10,8 +10,16 @@ const ThemeSettings = ({
   setCurrentImages,
 }) => {
   useEffect(() => {
-    let theme = options.theme.toLowerCase();
-    setCurrentImages(images[theme]);
+    const themeGame = localStorage.getItem('memorygametheme');
+    const savedTheme = JSON.parse(themeGame);
+
+    let theme = options.theme.toLowerCase();    
+    const json = JSON.stringify(theme);
+    localStorage.setItem('memorygametheme', json);
+
+    if(themeGame) {
+      setCurrentImages(images[theme]);
+    }
   }, [options.theme]);
 
   return (
