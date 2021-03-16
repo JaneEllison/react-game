@@ -7,6 +7,7 @@ const DifficultSettings = ({
   setOptions,
   chooseCurrentOption, 
   setField,
+  field,
 }) => {
   useEffect(() => {
     if(options.difficult === 12) {
@@ -19,9 +20,13 @@ const DifficultSettings = ({
       setField('field__difficult');
     }
 
-    const json = JSON.stringify(options.difficult);
-    localStorage.setItem('memorygamedifficult', json);
-  });
+    const savedDifficult = JSON.stringify(options.difficult);
+    localStorage.setItem('memorygamedifficult', savedDifficult);
+
+    const savedField = JSON.stringify(field);
+    localStorage.setItem('memoryfield', savedField);
+
+  }, [options]);
   
   return (
     <div className='difficulty__container'>

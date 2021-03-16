@@ -35,7 +35,7 @@ const Main = ({
   const [currentImages, setCurrentImages] = useState(null);
   const [isGameFinished, setIsGameFinished] = useState(false);
 
-  const [isSoundOn, setIsSoundOn] = useState(true);
+  const [isSoundOn, setIsSoundOn] = useState(savedIsSoundOn);
   const [soundValue, setSoundValue] = useState(savedSoundVolume || 0.5);
 
   const [currentTrack, setCurrentTrack] = useState(null);
@@ -47,7 +47,7 @@ const Main = ({
   let soundPlayer;
 
   useEffect(() => {
-    if (localStorage.getItem('memorygameissoundon' === null)) {
+    if (localStorage.getItem('memorygameissoundon') === null) {
       setIsSoundOn(true);
       soundPlayer.muted = false;
       setSoundValue(0.5);  
@@ -153,8 +153,6 @@ const Main = ({
   const backToGame = () => {
     setIsGameStarted(true);
     setIsRunningStopwatch(true);
-
-    //брать данные из локал сторадж
   }
 
   const backToMenu = () => {
@@ -246,6 +244,8 @@ const Main = ({
               setFiel={setField}
               currentImages={currentImages}
               setIsGameFinished={setIsGameFinished}
+              movesCount={movesCount}
+              setField={setField}
             />
           </>
         )

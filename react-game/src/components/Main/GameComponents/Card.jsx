@@ -18,17 +18,23 @@ const Card = ({
   setCurrentTrack,
   field,
 }) => {
+  useEffect(() => {
+    if(game[id].flipped){
+      setFlipped(flipped => !flipped);
+    }
+  },[])
+
   const [flipped, setFlipped] = useState(false);
-  const {transform, opacity} = useSpring({
+  const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
     transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
-    config: {mass: 6, tension: 500, friction: 90},
+    config: { mass: 6, tension: 500, friction: 90 },
   });
 
   useEffect(() => {
     if (flippedIndexes[2] === true && flippedIndexes.indexOf(id) > -1) {
       setTimeout(() => {
-        setFlipped(state => !state);
+        setFlipped(flipped => !flipped);
         setFlippedCount(flippedCount + 1);
         setFlippedIndexes([]);
         setCurrentTrack(wrongSound);
@@ -45,16 +51,21 @@ const Card = ({
   }, [flippedIndexes]);
 
   const onCardClick = () => {
-    if ((!game[id].flipped && flippedCount % 3 === 0) || 
-        (flippedCount % 3 === 1 && !game[id].flipped && flippedIndexes.indexOf(id) < 0)
-      ){
-        setFlipped(state => !state);
-        setFlippedCount(flippedCount + 1);
-        const newIndexes = [...flippedIndexes];
-        newIndexes.push(id);
-        setFlippedIndexes(newIndexes);
-        setMovesCount(movesCount + 1);
-      };
+    setTimeout(() => {
+      setCurrentTrack(rightSouns);
+      playSound();
+    }, 1000)
+
+    if ((!game[id].flipped && flippedCount % 3 === 0) ||
+      (flippedCount % 3 === 1 && !game[id].flipped && flippedIndexes.indexOf(id) < 0)
+    ) {
+      setFlipped(flipped => !flipped);
+      setFlippedCount(flippedCount + 1);
+      const newIndexes = [...flippedIndexes];
+      newIndexes.push(id);
+      setFlippedIndexes(newIndexes);
+      setMovesCount(movesCount + 1);
+    };
   };
 
   return (
@@ -71,7 +82,7 @@ const Card = ({
         style={{
           opacity,
           transform: transform.interpolate(t => `${t} rotateX(180deg)`),
-          backgroundImage:`url(${image})`,
+          backgroundImage: `url(${image})`,
         }}
       />
     </div>

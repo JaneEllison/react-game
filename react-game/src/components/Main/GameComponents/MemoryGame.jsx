@@ -16,44 +16,53 @@ const MemoryGame = ({
   setCurrentTrack,
   field,
   currentImages,
-  setIsGameFinished
+  setIsGameFinished,
+  setField,
 }) => {
+  const savedGame = JSON.parse(localStorage.getItem('memorygame'));
+  const savedField = JSON.parse(localStorage.getItem('memoryfield'));
 
   const [game, setGame] = useState([]);
   const [flippedCount, setFlippedCount] = useState(0);
   const [flippedIndexes, setFlippedIndexes] = useState([]);
 
   useEffect(() => {
-    const newGame = [];
-    for (let i = 0; i < options.difficult / 2; i++) {
-      const firstOption = {
-        id: 2 * i,
-        imgId: i,
-        image: currentImages?.[i],
-        flipped: false,
-      };
-      const secondOption = {
-        id: 2 * i + 1,
-        imgId: i,
-        image: currentImages?.[i],
-        flipped: false,
-      };
-
-      newGame.push(firstOption);
-      newGame.push(secondOption);
+    if(movesCount === 0) {
+      const newGame = [];
+      for (let i = 0; i < options.difficult / 2; i++) {
+        const firstOption = {
+          id: 2 * i,
+          imgId: i,
+          image: currentImages?.[i],
+          flipped: false,
+        };
+        const secondOption = {
+          id: 2 * i + 1,
+          imgId: i,
+          image: currentImages?.[i],
+          flipped: false,
+        };
+  
+        newGame.push(firstOption);
+        newGame.push(secondOption);
+      }
+  
+      const shuffledGame = newGame.sort(() => Math.random() - 0.5);
+      setGame(shuffledGame);
+      setIsRunningStopwatch(true);
+    } else {
+      setGame(savedGame);
+      setIsRunningStopwatch(true);
+      setField(savedField);
     }
-
-    const shuffledGame = newGame.sort(() => Math.random() - 0.5);
-    setGame(shuffledGame);
-    setIsRunningStopwatch(true);
-  }, [currentImages]);
+  }, [currentImages, options.difficult]);
 
   useEffect(() => {
     const finished = !game.some(card => !card.flipped);
 
     if (finished && game.length > 0) {
       setTimeout(() => {
-        let score=movesCount;
+        let score = movesCount;
         if (score > highScore) {
           setHighScore(score);
           const json = JSON.stringify(score);
@@ -66,6 +75,10 @@ const MemoryGame = ({
       setIsGameStarted('false');
       setIsRunningStopwatch(false);
     }
+
+    const savedGame = JSON.stringify(game);
+    localStorage.setItem('memorygame', savedGame);
+
   }, [game]);
 
   if (flippedIndexes.length === 2) {
@@ -81,9 +94,9 @@ const MemoryGame = ({
       newIndexes.push(false);
       setFlippedIndexes(newIndexes);
     } else {
-      const newIndexes = [...flippedIndexes]
-      newIndexes.push(true)
-      setFlippedIndexes(newIndexes)
+      const newIndexes = [...flippedIndexes];
+      newIndexes.push(true);
+      setFlippedIndexes(newIndexes);
     }
   };
   

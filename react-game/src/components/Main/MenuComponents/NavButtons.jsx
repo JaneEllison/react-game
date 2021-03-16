@@ -4,7 +4,7 @@ const NavButtons = ({
   options,
 }) => {
   return (
-    <div className="nav__buttons">
+    <div className="nav__buttons" >
       <button
         className="start__button"
         onClick={startNewGame}
@@ -15,7 +15,7 @@ const NavButtons = ({
       <button
         onClick={backToGame}
       >
-        Back
+        Back to game
       </button>
     </div>
   )

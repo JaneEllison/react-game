@@ -381,6 +381,9 @@ label {
   .sound__settings {
     width: 40%;
   }
+  button{
+    width: 30%;
+  }
   .cards {
     width: 500px;
   }

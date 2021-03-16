@@ -48,7 +48,7 @@ function App() {
 
   const [currentOptions, setCurrentOptions] = useState({
     currentDifficult: savedDifficult || null,
-    currentTheme: null,
+    currentTheme: savedTheme || null,
   });
 
   const [isGameStarted, setIsGameStarted] = useState(savedStartGame || false);
