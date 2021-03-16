@@ -40,21 +40,34 @@ const Main = ({
 
   const [currentTrack, setCurrentTrack] = useState(null);
 
-  const [isMusicOn, setIsMusicOn] = useState(true);
+  const [isMusicOn, setIsMusicOn] = useState(savedIsMusicOn);
   const [musicValue, setMusicValue] = useState(savedMusicVolume || 0.5);
 
   let audioPlayer;
   let soundPlayer;
 
   useEffect(() => {
-    if (localStorage.getItem('memorygameissoundon') === false) {
-      // setIsSoundOn(false);
-      // setSoundValue(0);
+    if (localStorage.getItem('memorygameissoundon' === null)) {
+      setIsSoundOn(true);
+      soundPlayer.muted = false;
+      setSoundValue(0.5);  
+    } else {
+      if(!JSON.parse((localStorage.getItem('memorygameissoundon')))) {
+        setIsSoundOn(false);
+        soundPlayer.muted = true;
+        setSoundValue(0);
+      }
     }
-    if (localStorage.getItem('memorygameismusicon')) {
-      // setIsMusicOn(savedIsMusicOn);
-      // setMusicValue(0);
-      // handleMuteMusic();
+    if (localStorage.getItem('memorygameismusicon') === null) {
+      setIsMusicOn(true);
+      audioPlayer.muted = false;
+      setMusicValue(0.5);
+    } else {
+      if(!JSON.parse((localStorage.getItem('memorygameismusicon')))) {
+        setIsMusicOn(false);
+        audioPlayer.muted = true;
+        setMusicValue(0);
+      }
     }
   }, []);
 
