@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSpring, animated as a } from "react-spring";
 import sounds from '../../../constants/sounds'
 
-const [themeMusic, rightSouns, wrongSound, finishSound] = sounds;
+const rightSouns = sounds[1];
+const wrongSound = sounds[2];
 
 const Card = ({
   id,
@@ -51,11 +52,6 @@ const Card = ({
   }, [flippedIndexes]);
 
   const onCardClick = () => {
-    setTimeout(() => {
-      setCurrentTrack(rightSouns);
-      playSound();
-    }, 1000)
-
     if ((!game[id].flipped && flippedCount % 3 === 0) ||
       (flippedCount % 3 === 1 && !game[id].flipped && flippedIndexes.indexOf(id) < 0)
     ) {

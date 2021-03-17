@@ -9,10 +9,10 @@ const ThemeSettings = ({
   chooseCurrentOption,
   setCurrentImages,
 }) => {
-  useEffect(() => {
-    const themeGame = localStorage.getItem('memorygametheme');
-    const savedTheme = JSON.parse(themeGame);
+  const themeGame = localStorage.getItem('memorygametheme');
+  const savedTheme = JSON.parse(themeGame);
 
+  useEffect(() => {
     let theme = options.theme.toLowerCase();    
     const json = JSON.stringify(theme);
     localStorage.setItem('memorygametheme', json);
@@ -29,7 +29,11 @@ const ThemeSettings = ({
         {ThemeButtons.map((button) => (
           <div className="block__settings" key={button.id}>
             <button
-              className={currentOptions.currentTheme === button.text ? "card__bg active" : "card__bg"}
+              className={
+                (currentOptions.currentTheme === button.text) || (savedTheme===button.text.toLocaleLowerCase())
+                ? "card__bg active"
+                : "card__bg"
+              }
               onClick={(event) => {
                 setOptions({
                   ...options,

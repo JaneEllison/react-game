@@ -9,7 +9,7 @@ export const ThemeButtons = [
   },
   {
     id: 3,
-    text: 'Eat',
+    text: 'Food',
   },
   {
     id: 4,

@@ -158,7 +158,7 @@ const images = {
   abstract: [abstr1, abstr2, abstr3, abstr4, abstr5, abstr6, abstr7, abstr8, abstr9, abstr10, abstr11, abstr12],
   animals: [animals1, animals2, animals3, animals4, animals5, animals6, animals7, animals8, animals9, animals10, animals11, animals12],
   doggo: [doggo1, doggo2, doggo3, doggo4, doggo5, doggo6, doggo7, doggo8, doggo9, doggo10, doggo11, doggo12],
-  eat: [eat1, eat2, eat3, eat4, eat5, eat6, eat7, eat8, eat9, eat10, eat11, eat12],
+  food: [eat1, eat2, eat3, eat4, eat5, eat6, eat7, eat8, eat9, eat10, eat11, eat12],
   fire: [fire1, fire2, fire3, fire4, fire5, fire6, fire7, fire8, fire9, fire10, fire11, fire12],
   flora: [flora1, flora2, flora3, flora4, flora5, flora6, flora7, flora8, flora9, flora10, flora11, flora12],
   landscape: [land1, land2, land3, land4, land5, land6, land7, land8, land9, land10, land11, land12],

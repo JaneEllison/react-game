@@ -65,8 +65,8 @@ const MemoryGame = ({
         let score = movesCount;
         if (score > highScore) {
           setHighScore(score);
-          const json = JSON.stringify(score);
-          localStorage.setItem('memorygamehighscore', json);
+          const savedHighScore = JSON.stringify(highScore);
+          localStorage.setItem('memorygamehighscore', savedHighScore);
         }
         setCurrentTrack(finishSound);
         playSound();

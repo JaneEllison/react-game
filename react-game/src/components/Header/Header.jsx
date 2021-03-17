@@ -1,6 +1,5 @@
 import '../Header/SwitcherStyle.css'
 import Counter from '../Header/Counter';
-import React, { useEffect } from "react";
 
 const Header = ({
   highScore,

@@ -19,7 +19,6 @@ const Counter = ({ isRunningStopwatch, stopwatchSeconds, setStopwatchSeconds, mo
     if (isRunningStopwatch) {
       const stopwatchInterval = window.setInterval(() => {
         changeSeconds((seconds) => seconds + 1);
-        
       }, 1000);
       return () => window.clearInterval(stopwatchInterval);
     }
