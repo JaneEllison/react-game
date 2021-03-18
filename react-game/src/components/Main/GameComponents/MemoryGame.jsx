@@ -22,6 +22,7 @@ const MemoryGame = ({
   const savedGame = JSON.parse(localStorage.getItem('memorygame'));
   const savedField = JSON.parse(localStorage.getItem('memoryfield'));
 
+  //+
   const [game, setGame] = useState([]);
   const [flippedCount, setFlippedCount] = useState(0);
   const [flippedIndexes, setFlippedIndexes] = useState([]);

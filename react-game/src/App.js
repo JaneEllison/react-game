@@ -15,11 +15,13 @@ function App() {
   const savedMoves = JSON.parse(localStorage.getItem('memorygamemoves'));
   const savedStartGame = JSON.parse(localStorage.getItem('memorygamestart'));
   
+  //+
   const [options, setOptions] = useState({
     difficult: savedDifficult || null,
     theme: savedTheme || 'stars',
   });
 
+  //+
   const [currentMode, setCurrentMode] = useState('dark');
   const [isChecked, setIsChecked] = useState(false);
 
@@ -46,11 +48,13 @@ function App() {
     localStorage.setItem('mode', newMode);
   };
 
+  //+
   const [currentOptions, setCurrentOptions] = useState({
     currentDifficult: savedDifficult || null,
     currentTheme: savedTheme || null,
   });
 
+  //+
   const [isGameStarted, setIsGameStarted] = useState(savedStartGame || false);
   const [isRunningStopwatch, setIsRunningStopwatch] = useState(false);
   const [stopwatchSeconds, setStopwatchSeconds] = useState(savedSeconds || 0);
