@@ -4,18 +4,20 @@ import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 import './App.css';
-import { lightTheme, darkTheme } from './constants/themeSettings'
+import { lightTheme, darkTheme } from './constants/themeSettings';
+import UseStore from './core/store/useStore';
 
 export const ModeContext = createContext('dark');
 
 function App() {
+  const {state} = useStore();
+
   const savedTheme = JSON.parse(localStorage.getItem('memorygametheme'));
   const savedDifficult = JSON.parse(localStorage.getItem('memorygamedifficult'));
   const savedSeconds = JSON.parse(localStorage.getItem('memorygameseconds'));
   const savedMoves = JSON.parse(localStorage.getItem('memorygamemoves'));
   const savedStartGame = JSON.parse(localStorage.getItem('memorygamestart'));
-  
-  //+
+
   const [options, setOptions] = useState({
     difficult: savedDifficult || null,
     theme: savedTheme || 'stars',
@@ -31,15 +33,14 @@ function App() {
       setIsChecked(true);
     }
   }, []);
-
   useEffect(() => {
-    const theme = currentMode === 'light' ? lightTheme : darkTheme;
+    const theme = state.theme === 'light' ? lightTheme : darkTheme;
 
     Object.keys(theme).forEach(key => {
       const value = theme[key];
       document.documentElement.style.setProperty(key, value);
     });
-  }, [currentMode]);
+  }, [state.theme]);
 
   const toggleTheme = () => {
     const newMode = currentMode === 'light' ? 'dark' : 'light';

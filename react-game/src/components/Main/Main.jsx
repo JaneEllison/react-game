@@ -8,6 +8,8 @@ import sounds from '../../constants/sounds'
 import MemoryGame from './GameComponents/MemoryGame'
 import EndGamePopup from './GameComponents/EndGamePopup'
 
+import useStore from '../../core/store/useStore'
+
 const [themeMusic] = sounds;
 
 const Main = ({
@@ -51,7 +53,7 @@ const Main = ({
     if (localStorage.getItem('memorygameissoundon') === null) {
       setIsSoundOn(true);
       soundPlayer.muted = false;
-      setSoundValue(0.5);  
+      setSoundValue(0.5);
     } else {
       if(!JSON.parse((localStorage.getItem('memorygameissoundon')))) {
         setIsSoundOn(false);
@@ -93,7 +95,7 @@ const Main = ({
     setIsSoundOn(!isSoundOn);
     handleMuteSound();
     localStorage.setItem('memorygameissoundon', JSON.stringify(!isSoundOn));
-    localStorage.setItem('memorygamesoundvolume', soundValue);  
+    localStorage.setItem('memorygamesoundvolume', soundValue);
   };
 
   const changeMusicState = () => {
