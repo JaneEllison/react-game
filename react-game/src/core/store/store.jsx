@@ -1,7 +1,8 @@
 import React, {useReducer} from 'react';
 
 const initialState = {
-  theme: 'light',
+  theme: 'dark',
+  
 };
 
 export const Context = React.createContext({});

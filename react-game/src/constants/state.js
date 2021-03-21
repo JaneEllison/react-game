@@ -6,7 +6,7 @@ const [options, setOptions] = useState({
 });
 
 // текущая тема (dark/light)
-const [currentMode, setCurrentMode] = useState('dark');
+// const [currentMode, setCurrentMode] = useState('dark');
 
 // включен ли переключатель тем(т.е. включена ли светла тема)
 const [isChecked, setIsChecked] = useState(false);

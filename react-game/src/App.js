@@ -5,7 +5,7 @@ import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 import './App.css';
 import { lightTheme, darkTheme } from './constants/themeSettings';
-import UseStore from './core/store/useStore';
+import useStore from './core/store/useStore';
 
 export const ModeContext = createContext('dark');
 
@@ -23,16 +23,13 @@ function App() {
     theme: savedTheme || 'stars',
   });
 
-  //+
-  const [currentMode, setCurrentMode] = useState('dark');
-  const [isChecked, setIsChecked] = useState(false);
+  // useEffect(() => {
+  //   if (localStorage.getItem('mode') === 'light') {
+  //     setCurrentMode('light');
+  //     setIsChecked(true);
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    if (localStorage.getItem('mode') === 'light') {
-      setCurrentMode('light');
-      setIsChecked(true);
-    }
-  }, []);
   useEffect(() => {
     const theme = state.theme === 'light' ? lightTheme : darkTheme;
 
@@ -41,13 +38,6 @@ function App() {
       document.documentElement.style.setProperty(key, value);
     });
   }, [state.theme]);
-
-  const toggleTheme = () => {
-    const newMode = currentMode === 'light' ? 'dark' : 'light';
-    setIsChecked(!isChecked);
-    setCurrentMode(newMode);
-    localStorage.setItem('mode', newMode);
-  };
 
   //+
   const [currentOptions, setCurrentOptions] = useState({
@@ -78,7 +68,7 @@ function App() {
   }, []);
 
   return (
-    <ModeContext.Provider value={currentMode}>
+    <ModeContext.Provider value={state.theme}>
       <div className="App">
         <Header
           isRunningStopwatch={isRunningStopwatch}
@@ -86,8 +76,6 @@ function App() {
           setStopwatchSeconds={setStopwatchSeconds}
           movesCount={movesCount}
           highScore={highScore}
-          toggleTheme={toggleTheme}
-          isChecked={isChecked}
         />
         <Main
           isGameStarted={isGameStarted}
