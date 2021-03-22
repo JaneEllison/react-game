@@ -8,14 +8,12 @@ import sounds from '../../constants/sounds'
 import MemoryGame from './GameComponents/MemoryGame'
 import EndGamePopup from './GameComponents/EndGamePopup'
 
+import useStore from '../../core/store/useStore'
+
 const [themeMusic] = sounds;
 
 const Main = ({
   isGameStarted,
-  currentOptions,
-  options,
-  setOptions,
-  chooseCurrentOption,
   setIsGameStarted,
   setStopwatchSeconds,
   setMovesCount,
@@ -31,6 +29,7 @@ const Main = ({
   const savedIsMusicOn = JSON.parse(localStorage.getItem('memorygameismusicon'));
   const savedMusicVolume = JSON.parse(localStorage.getItem('memorygamemusicvolume'));
 
+  //+
   const [field, setField] = useState('');
   const [currentImages, setCurrentImages] = useState(null);
   const [isGameFinished, setIsGameFinished] = useState(false);
@@ -50,7 +49,7 @@ const Main = ({
     if (localStorage.getItem('memorygameissoundon') === null) {
       setIsSoundOn(true);
       soundPlayer.muted = false;
-      setSoundValue(0.5);  
+      setSoundValue(0.5);
     } else {
       if(!JSON.parse((localStorage.getItem('memorygameissoundon')))) {
         setIsSoundOn(false);
@@ -92,7 +91,7 @@ const Main = ({
     setIsSoundOn(!isSoundOn);
     handleMuteSound();
     localStorage.setItem('memorygameissoundon', JSON.stringify(!isSoundOn));
-    localStorage.setItem('memorygamesoundvolume', soundValue);  
+    localStorage.setItem('memorygamesoundvolume', soundValue);
   };
 
   const changeMusicState = () => {
@@ -198,27 +197,18 @@ const Main = ({
                 formatVolume={formatVolume}
               />
               <DifficultSettings
-                currentOptions={currentOptions}
-                options={options}
-                setOptions={setOptions}
-                chooseCurrentOption={chooseCurrentOption}
                 field={field}
                 setField={setField}
               />
             </div>
             <div className="second__block_settings">
               <ThemeSettings
-                currentOptions={currentOptions}
-                setOptions={setOptions}
-                options={options}
-                chooseCurrentOption={chooseCurrentOption}
                 setCurrentImages={setCurrentImages}
               />
             </div>
             <NavButtons
               startNewGame={startNewGame}
               backToGame={backToGame}
-              options={options}
             />
           </>
         )
@@ -231,7 +221,6 @@ const Main = ({
               setMovesCount={setMovesCount}
             />
             <MemoryGame
-              options={options}
               highScore={highScore}
               setHighScore={setHighScore}
               setIsRunningStopwatch={setIsRunningStopwatch}

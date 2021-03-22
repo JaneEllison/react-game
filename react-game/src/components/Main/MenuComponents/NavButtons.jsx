@@ -1,14 +1,12 @@
 const NavButtons = ({
   startNewGame,
   backToGame,
-  options,
 }) => {
   return (
     <div className="nav__buttons" >
       <button
         className="start__button"
         onClick={startNewGame}
-        disabled={options.difficult === null || options.theme === null}
       >
         New game
       </button>

@@ -19,13 +19,7 @@ const Card = ({
   setCurrentTrack,
   field,
 }) => {
-  useEffect(() => {
-    if(game[id].flipped){
-      setFlipped(flipped => !flipped);
-    }
-  },[])
-
-  const [flipped, setFlipped] = useState(false);
+  const [flipped, setFlipped] = useState(game[id].flipped);
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
     transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,

@@ -1,5 +1,7 @@
-import '../Header/SwitcherStyle.css'
+import '../Header/SwitcherStyle.css';
+import {useCallback} from 'react';
 import Counter from '../Header/Counter';
+import useStore from '../../core/store/useStore';
 
 const Header = ({
   highScore,
@@ -7,9 +9,23 @@ const Header = ({
   stopwatchSeconds,
   setStopwatchSeconds,
   movesCount,
-  toggleTheme,
-  isChecked,
 }) => {
+  const {dispatch, state} = useStore();
+  const isChecked = state.theme === 'light';
+
+  const toggleTheme = useCallback((event) => {
+    const {checked} = event.target;
+    const newMode = checked? 'light' : 'dark';
+
+    dispatch({
+      type: 'CHANGE_THEME',
+      payload: {theme: newMode}
+    });
+
+    localStorage.setItem('mode', newMode);
+  });
+
+
     return (
     <header className="App-header">
       <h1>
