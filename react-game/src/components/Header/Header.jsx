@@ -23,7 +23,7 @@ const Header = ({
     });
 
     localStorage.setItem('mode', newMode);
-  })
+  });
 
 
     return (

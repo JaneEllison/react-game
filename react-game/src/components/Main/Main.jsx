@@ -14,10 +14,6 @@ const [themeMusic] = sounds;
 
 const Main = ({
   isGameStarted,
-  currentOptions,
-  options,
-  setOptions,
-  chooseCurrentOption,
   setIsGameStarted,
   setStopwatchSeconds,
   setMovesCount,
@@ -201,27 +197,18 @@ const Main = ({
                 formatVolume={formatVolume}
               />
               <DifficultSettings
-                currentOptions={currentOptions}
-                options={options}
-                setOptions={setOptions}
-                chooseCurrentOption={chooseCurrentOption}
                 field={field}
                 setField={setField}
               />
             </div>
             <div className="second__block_settings">
               <ThemeSettings
-                currentOptions={currentOptions}
-                setOptions={setOptions}
-                options={options}
-                chooseCurrentOption={chooseCurrentOption}
                 setCurrentImages={setCurrentImages}
               />
             </div>
             <NavButtons
               startNewGame={startNewGame}
               backToGame={backToGame}
-              options={options}
             />
           </>
         )
@@ -234,7 +221,6 @@ const Main = ({
               setMovesCount={setMovesCount}
             />
             <MemoryGame
-              options={options}
               highScore={highScore}
               setHighScore={setHighScore}
               setIsRunningStopwatch={setIsRunningStopwatch}

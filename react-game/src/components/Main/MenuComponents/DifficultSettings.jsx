@@ -1,32 +1,39 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
+import useStore from '../../../core/store/useStore';
+
 import { DifficultButtons } from '../../../constants/buttons';
 
 const DifficultSettings = ({
-  currentOptions,
-  options,
-  setOptions,
-  chooseCurrentOption, 
   setField,
   field,
 }) => {
+
+  const {dispatch, state} = useStore();
+
+  const changeDifficulty = useCallback((value) => {
+    dispatch({
+      type: 'CHANGE_DIFFICULTY',
+      payload: {difficulty: value},
+    });
+  });
+
   useEffect(() => {
-    if(options.difficult === 12) {
+    if(state.difficult === 12) {
       setField('field__easy');
     }
-    if(options.difficult === 18) {
+    if(state.difficult === 18) {
       setField('field__normal');
     }
-    if(options.difficult === 24){
+    if(state.difficult === 24){
       setField('field__difficult');
     }
 
-    const savedDifficult = JSON.stringify(options.difficult);
-    localStorage.setItem('memorygamedifficult', savedDifficult);
+    // const savedDifficult = JSON.stringify(state.difficult);
+    // localStorage.setItem('memorygamedifficult', savedDifficult);
 
-    const savedField = JSON.stringify(field);
-    localStorage.setItem('memoryfield', savedField);
-
-  }, [options]);
+    // const savedField = JSON.stringify(field);
+    // localStorage.setItem('memoryfield', savedField);
+  }, [state.difficult]);
   
   return (
     <div className='difficulty__container'>
@@ -37,17 +44,11 @@ const DifficultSettings = ({
             <button
               key={button.id}
               className={
-                currentOptions.currentDifficult === button.text
+                state.difficulty === button.value
                 ? "difficult__button active"
                 : "difficult__button"
               }
-              onClick={(event) => {
-                setOptions({
-                  ...options,
-                  difficult: button.value,
-                });
-                chooseCurrentOption(event);
-              }}
+              onClick={() => changeDifficulty(button.value)}
             >
             {button.text}
             </button>

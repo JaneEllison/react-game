@@ -18,11 +18,6 @@ function App() {
   const savedMoves = JSON.parse(localStorage.getItem('memorygamemoves'));
   const savedStartGame = JSON.parse(localStorage.getItem('memorygamestart'));
 
-  const [options, setOptions] = useState({
-    difficult: savedDifficult || null,
-    theme: savedTheme || 'stars',
-  });
-
   // useEffect(() => {
   //   if (localStorage.getItem('mode') === 'light') {
   //     setCurrentMode('light');
@@ -39,25 +34,11 @@ function App() {
     });
   }, [state.theme]);
 
-  //+
-  const [currentOptions, setCurrentOptions] = useState({
-    currentDifficult: savedDifficult || null,
-    currentTheme: savedTheme || null,
-  });
-
-  //+
   const [isGameStarted, setIsGameStarted] = useState(savedStartGame || false);
   const [isRunningStopwatch, setIsRunningStopwatch] = useState(false);
   const [stopwatchSeconds, setStopwatchSeconds] = useState(savedSeconds || 0);
   const [movesCount, setMovesCount] = useState(savedMoves || 0);
   const [highScore, setHighScore] = useState(0);
-
-
-  const chooseCurrentOption=(event) => {
-    (event.target.className === 'card__bg' || event.target.className === 'card__bg active')
-    ? setCurrentOptions({...currentOptions, currentTheme:event.target.innerText})
-    : setCurrentOptions({...currentOptions, currentDifficult:event.target.innerText})
-  };
 
   useEffect(() => {
     const highScore = localStorage.getItem('memorygamehighscore');
@@ -79,10 +60,6 @@ function App() {
         />
         <Main
           isGameStarted={isGameStarted}
-          currentOptions={currentOptions}
-          options={options}
-          setOptions={setOptions}
-          chooseCurrentOption={chooseCurrentOption}
           setStopwatchSeconds={setStopwatchSeconds}
           setMovesCount={setMovesCount}
           setIsGameStarted={setIsGameStarted}
